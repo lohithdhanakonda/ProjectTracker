@@ -1,9 +1,10 @@
 import React from 'react'
+import PageTitle from '../../../components/PageTitle/PageTitle';
 
 export class ProjectView extends React.Component{
     render(){
         return(
-            <div>Project view</div>
+            <div><PageTitle title="Project name"></PageTitle></div>
         )
     }
 }

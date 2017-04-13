@@ -4,8 +4,10 @@ import './CoreLayout.scss'
 import '../../styles/core.scss'
 
 export const CoreLayout = ({ children }) => (
-  <div className='container text-center'>
-    <Header />
+  <div>
+    <div className='header'>
+      <Header />
+    </div>
     <div className='core-layout__viewport'>
       {children}
     </div>
@@ -13,7 +15,7 @@ export const CoreLayout = ({ children }) => (
 )
 
 CoreLayout.propTypes = {
-  children : React.PropTypes.element.isRequired
+  children: React.PropTypes.element.isRequired
 }
 
 export default CoreLayout
