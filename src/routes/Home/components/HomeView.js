@@ -1,9 +1,10 @@
 import React from 'react'
 import './HomeView.scss'
+import PageTitle from '../../../components/PageTitle/PageTitle';
 
 export const HomeView = () => (
   <div>
-    <h4>Welcome!</h4>
+    <PageTitle title="Home"></PageTitle>
   </div>
 )
 
