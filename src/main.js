@@ -1,24 +1,26 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { combineReducers, applyMiddleware } from 'redux';
 import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
-
+import { Router, Route, browserHistory } from 'react-router'
+import { syncHistoryWithStore, routerReducer,routerMiddleware } from 'react-router-redux'
 // ========================================================
 // Store Instantiation
 // ========================================================
 const initialState = window.___INITIAL_STATE__
-const store = createStore(initialState)
-
+const middleware = routerMiddleware(browserHistory)
+const store = createStore(initialState,applyMiddleware(middleware))
 // ========================================================
 // Render Setup
 // ========================================================
 const MOUNT_NODE = document.getElementById('root')
 
-let render = () => {
+let render = (routerKey = null) => {
   const routes = require('./routes/index').default(store)
-
+  const history = syncHistoryWithStore(browserHistory, store)
   ReactDOM.render(
-    <AppContainer store={store} routes={routes} />,
+    <AppContainer store={store} routes={routes} history={history} routerKey={routerKey}/>,
     MOUNT_NODE
   )
 }

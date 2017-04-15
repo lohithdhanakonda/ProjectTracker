@@ -1,0 +1,14 @@
+[
+    {"techid":1,"technology":"C#"},
+    {"techid":2,"technology":"DOTNET"},
+    {"techid":3,"technology":"Java"},
+    {"techid":4,"technology":"Asp .Net"},
+    {"techid":5,"technology":"Angular >2"},
+    {"techid":6,"technology":"Angular js"},
+    {"techid":7,"technology":"django"},
+    {"techid":8,"technology":"Python"},
+    {"techid":9,"technology":"Ruby on Rails"},
+    {"techid":10,"technology":"Ruby"},
+    {"techid":11,"technology":"React-redux"},
+    {"techid":12,"technology":"React js"},
+]

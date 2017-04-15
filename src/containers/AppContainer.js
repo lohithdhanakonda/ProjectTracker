@@ -18,13 +18,13 @@ class AppContainer extends Component {
 
   render () {
     // const muiTheme = getMuiTheme();
-    const { routes, store } = this.props
+    const { routes, store, history, routerKey} = this.props
 
     return (
     <MuiThemeProvider>
       <Provider store={store}>
         <div style={{ height: '100%' }}>
-          <Router history={browserHistory} children={routes} />
+          <Router history={browserHistory} children={routes} history={history} key={routerKey}/>
         </div>
       </Provider>
     </MuiThemeProvider>
