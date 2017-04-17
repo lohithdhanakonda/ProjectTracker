@@ -4,13 +4,16 @@ import { combineReducers, applyMiddleware } from 'redux';
 import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
 import { Router, Route, browserHistory } from 'react-router'
-import { syncHistoryWithStore, routerReducer,routerMiddleware } from 'react-router-redux'
+// import createHistory from 'history/createBrowserHistory'
+import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux'
+// import { reduxReactRouter, routerStateReducer, ReduxRouter } from 'redux-react-router';
 // ========================================================
 // Store Instantiation
 // ========================================================
 const initialState = window.___INITIAL_STATE__
-const middleware = routerMiddleware(browserHistory)
-const store = createStore(initialState,applyMiddleware(middleware))
+// const history = createHistory()
+// const middleware = routerMiddleware(history)
+const store = createStore(initialState);//, applyMiddleware(middleware))
 // ========================================================
 // Render Setup
 // ========================================================

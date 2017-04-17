@@ -1,6 +1,8 @@
-import ProjectDetails from '../../../api/ProjectDetails.json'
+import ProjectsData from '../../../api/ProjectsData.json'
 import { browserHistory } from 'react-router';
 import _ from  'lodash'
+import { push } from 'react-router-redux';
+
 export const LOAD_PROJECTS = 'LOAD_PROJECTS'
 export const ARCHIVE_PROJECT = 'ARCHIVE_PROJECT'
 export const ADD_PROJECT = 'ADD_PROJECT'
@@ -9,8 +11,12 @@ export const PROJECT_DETAILS = 'PROJECT_DETAILS'
 export function LoadProjects() {
     return {
         type: LOAD_PROJECTS,
-        payload: ProjectDetails
+        payload: ProjectsData
     }
+}
+
+export function NavigateToProject(id) {
+
 }
 export function Drag_Project(event) {
     return (dispatch, getState) => {
@@ -24,7 +30,7 @@ export function Drag_Project(event) {
 }
 export function filterProjects(value) {
     let projects = [];
-    ProjectDetails.forEach(function (element) {
+    ProjectsData.forEach(function (element) {
         if (value > 1 && element.name[0].toLowerCase() == String.fromCharCode(value)) {
             projects.push(element);
         }
@@ -39,7 +45,7 @@ export function filterProjects(value) {
         return new Promise((resolve) => {
             dispatch({
                 type: LOAD_PROJECTS,
-                payload: value == 0 ? ProjectDetails : projects
+                payload: value == 0 ? ProjectsData : projects
             })
         })
     }
@@ -49,16 +55,6 @@ export function Add_Project() {
         return new Promise((resolve) => {
             dispatch({
                 type: ADD_PROJECT
-            })
-        })
-    }
-}
-export function Project_Details(id) {
-    return (dispatch, getState) => {
-        return new Promise((resolve) => {
-            dispatch({
-                type: PROJECT_DETAILS,
-                payload: id
             })
         })
     }
@@ -73,7 +69,10 @@ function AddProject(action) {
 
 function ProjectDetail(action) {
     console.log("Project ID", action.payload);
-    browserHistory.push(`/project/${action.payload}`);
+    return (dispatch, getState) => {
+        console.log(dispatch)
+        console.log(getState)
+    }
 }
 
 const ACTION_HANDLERS = {
@@ -92,13 +91,12 @@ const ACTION_HANDLERS = {
         return Object.assign({}, state)
     },
     LOAD_PROJECTS: (state, action) => {
-        return Object.assign({}, state, { projects: action.payload, filteredProjects: action.payload })
+        return Object.assign({}, state, { projects: action.payload })
     }
 }
 
 const initialState = {
-    projects: [],
-    filteredProjects: []
+    projects: []
 }
 
 export default function homeReducer(state = initialState, action) {

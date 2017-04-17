@@ -3,8 +3,9 @@ import '../styles/HomeStyles.scss'
 import PageTitle from '../../../components/PageTitle/PageTitle';
 import { TileLayout, TileLayoutItem } from 'pui-react-tile-layout';
 import { ClickableAltPanel } from 'pui-react-panels';
-import { Table, Navbar, Nav, NavItem} from 'react-bootstrap';
+import { Table, Navbar, Nav, NavItem, Tooltip, OverlayTrigger} from 'react-bootstrap';
 import { Draggable, Droppable } from 'react-drag-and-drop'
+import { Link, browserHistory } from 'react-router'
 
 const AlphaFilter = (props) => {
   var indexes = [];
@@ -44,9 +45,13 @@ class ChildTileLayoutItem extends React.Component {
     return (
       <Draggable className="arrangeTiles" type='project' data={this.props.Project.ID}>
         <TileLayoutItem>
-          <ClickableAltPanel key={this.props.Project.id} onClick={() => this.props.ProjectDetailsView(this.props.Project.id) }>
+          <ClickableAltPanel key={this.props.Project.id} onClick={() => browserHistory.push('/project/' + this.props.Project.id) }>
             <div>
-              ProjectName: {this.props.Project.name}
+              <div className="project-name">
+                <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip">{this.props.Project.name}</Tooltip>}>
+                  <strong>{this.props.Project.name}</strong>
+                </OverlayTrigger>
+              </div>
               <div className="table-div">
                 <Table responsive>
                   <thead>
@@ -68,7 +73,7 @@ class ChildTileLayoutItem extends React.Component {
             </div>
           </ClickableAltPanel>
         </TileLayoutItem>
-      </Draggable>
+      </Draggable >
     );
   }
 }
@@ -78,13 +83,13 @@ class ProjectsView extends React.Component {
     return (<div>
 
       <div className="row">
-        <AlphaFilter  FilterProject={this.props.FilterProject}/>
+        <AlphaFilter FilterProject={this.props.FilterProject}/>
 
         <div>
           <div className="col-lg-8 col-md-8 col-sm-6 col-xs-6">
             <div className="projects-view">
               <TileLayout columns={{ md: 3, lg: 3, xs: 1, sm: 1 }}>{
-                this.props.Projects.map((project) => <ChildTileLayoutItem key={project.Team} Project={project} ProjectDetailsView={this.props.ProjectDetailsView} />)
+                this.props.Projects.map((project) => <ChildTileLayoutItem key={project.id} Project={project} ProjectDetailsView={this.props.ProjectDetailsView} />)
               }
               </TileLayout>
             </div>
@@ -103,7 +108,7 @@ class HomeView extends React.Component {
     return (
       <div className="homeview">
         <ProjectsView
-          Projects={this.props.filteredprojects}
+          Projects={this.props.projects}
           AddProject={this.props.Add_Project}
           DragProject={this.props.Drag_Project}
           ProjectDetailsView={this.props.Project_Details}
