@@ -18,31 +18,11 @@ const AlphaFilter = (props) => {
       <a onClick={() => props.FilterProject(alph) } key={i}>{String.fromCharCode(alph) }</a>
     )) }</div>)
 }
-class NavbarInstance extends React.Component {
-  render() {
-    return (
-      <div>
-        <div>
-        </div>
-        <div onClick={this.props.AddProject}  >
-          <span className="addproject"><i className="fa fa-plus-circle iconButton" ></i> Add Project</span>
-        </div>
-        <div>
-          <Droppable types={'project'} onDrop={this.props.DragProject} >
-            <div className="Smoothie">
-              <span className="archiveproject">  <i className="fa fa-archive iconButton" ></i> Archive Project</span>
-            </div>
-          </Droppable>
-        </div>
-      </div>
-    );
-  }
-}
 
 class ChildTileLayoutItem extends React.Component {
   render() {
     return (
-      <Draggable className="arrangeTiles" type='project' data={this.props.Project.ID}>
+      <Draggable className="arrangeTiles" type='project' data={this.props.Project.id}>
         <TileLayoutItem>
           <ClickableAltPanel key={this.props.Project.id} onClick={() => this.props.ProjectDetailsView(this.props.Project.id) }>
             <div>
@@ -76,21 +56,30 @@ class ChildTileLayoutItem extends React.Component {
 class ProjectsView extends React.Component {
   render() {
     return (<div>
-
       <div className="row">
-        <AlphaFilter  FilterProject={this.props.FilterProject}/>
-
+        <AlphaFilter FilterProject={this.props.FilterProject} />
         <div>
           <div className="col-lg-8 col-md-8 col-sm-6 col-xs-6">
             <div className="projects-view">
               <TileLayout columns={{ md: 3, lg: 3, xs: 1, sm: 1 }}>{
-                this.props.Projects.map((project) => <ChildTileLayoutItem key={project.Team} Project={project} ProjectDetailsView={this.props.ProjectDetailsView} />)
+                this.props.Projects.map((project) => <ChildTileLayoutItem key={project.id} Project={project} ProjectDetailsView={this.props.ProjectDetailsView} />)
               }
               </TileLayout>
             </div>
           </div>
           <div className="col-lg-4 col-md-4 col-sm-6 col-xs-6 add-del-icons">
-            <NavbarInstance DragProject={this.props.DragProject} AddProject={this.props.AddProject}/>
+            <div>
+              <div onClick={this.props.AddProject}  >
+                <span className="addproject"><i className="fa fa-plus-circle iconButton" ></i> Add Project</span>
+              </div>
+              <div>
+                <Droppable types={'project'} onDrop={this.props.DragProject} >
+                  <div className="Smoothie">
+                    <span className="archiveproject">  <i className="fa fa-archive iconButton" ></i> Archive Project</span>
+                  </div>
+                </Droppable>
+              </div>
+            </div>
           </div>
         </div>
       </div>
