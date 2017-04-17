@@ -43,7 +43,7 @@ class NavbarInstance extends React.Component {
 class ChildTileLayoutItem extends React.Component {
   render() {
     return (
-      <Draggable className="arrangeTiles" type='project' data={this.props.Project.ID}>
+      <Draggable className="arrangeTiles" type='project' data={this.props.Project.id}>
         <TileLayoutItem>
           <ClickableAltPanel key={this.props.Project.id} onClick={() => browserHistory.push('/project/' + this.props.Project.id) }>
             <div>
@@ -83,7 +83,7 @@ class ProjectsView extends React.Component {
     return (<div>
 
       <div className="row">
-        <AlphaFilter FilterProject={this.props.FilterProject}/>
+        <AlphaFilter  FilterProject={this.props.FilterProject}/>
 
         <div>
           <div className="col-lg-8 col-md-8 col-sm-6 col-xs-6">
@@ -95,7 +95,18 @@ class ProjectsView extends React.Component {
             </div>
           </div>
           <div className="col-lg-4 col-md-4 col-sm-6 col-xs-6 add-del-icons">
-            <NavbarInstance DragProject={this.props.DragProject} AddProject={this.props.AddProject}/>
+            <div>
+              <div onClick={this.props.AddProject}  >
+                <span className="addproject"><i className="fa fa-plus-circle iconButton" ></i> Add Project</span>
+              </div>
+              <div>
+                <Droppable types={'project'} onDrop={this.props.DragProject} >
+                  <div className="Smoothie">
+                    <span className="archiveproject">  <i className="fa fa-archive iconButton" ></i> Archive Project</span>
+                  </div>
+                </Droppable>
+              </div>
+            </div>
           </div>
         </div>
       </div>
