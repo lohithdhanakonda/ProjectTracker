@@ -1,0 +1,94 @@
+.duck {
+  display: block;
+  width: 120px;
+  margin: 1.5rem auto;
+}
+.border
+{
+    border-style: solid;
+    border-width: 1px;
+    align-content: center;
+}
+.iconButton{
+    font-size:48px;
+    padding-bottom: 100px;
+}
+.archiveproject{
+    color: #ea4a55;
+    padding: 20px;
+}
+.addproject{
+    color:#5ec56d;
+    padding: 20px;
+    
+}
+.arrangeTiles
+{
+    padding-inline-start: 10px;
+    padding-left:10px;
+}
+.projects-view{
+    width: 250%;
+    height: 100%;
+}
+.add-del-icons{
+    padding-top: 20px;
+    float: right!important;
+}
+// .homeview{
+//     padding: 70px;
+// }
+.alpha-tabs{
+    border: 1px solid;
+    border-color: blue;
+    cursor:pointer;
+}
+.ln-letters{
+    overflow: hidden;
+    padding-bottom: 20px;
+}
+@media only screen and (min-width:1920px){
+    .ln-letters{
+        padding-left: 770px;
+    }
+}
+@media only screen and (min-width:1200px){
+ .homeview{
+        padding: 70px;
+    }
+}
+@media only screen and (max-width:1200px){
+ .homeview{
+        padding: 50px;
+    }
+}
+.panel.panel-clickable-alt:hover{
+    background-color: #dde0ea;
+}
+.panel-body{
+    text-align: center;
+}
+.table-div{
+    padding-top: 2%;
+    padding-bottom: 0px;
+}
+.ln-letters a {
+    font-size: 0.9em;
+    display: block;
+    float: left;
+    padding: 2px 6px;
+    border: 1px solid silver;
+    border-right: none;
+    text-decoration: none;
+    text-decoration: none;
+    color: #007edf;
+    text-shadow: none;
+    cursor: pointer;
+}
+.ln-letters a:hover {
+    text-decoration: none;
+    color: #007edf;
+    text-shadow: none;
+    background-color:#eaeaea ;
+    
+}
