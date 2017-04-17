@@ -1,6 +1,6 @@
 import { injectReducer } from '../../store/reducers'
 export default (store) => ({
-  path: 'project/:id',
+  path: 'project/:projectid',
   /*  Async getComponent is only invoked when route matches   */
   getComponent(nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point
@@ -10,10 +10,8 @@ export default (store) => ({
           dependencies for bundling   */
       const Project = require('./containers/ProjectContainer').default
       const projectReducer = require('./modules/project').default
-
       /*  Add the reducer to the store on key 'project'  */
       injectReducer(store, { key: 'project', reducer: projectReducer })
-
       /*  Return getComponent   */
       cb(null, Project)
 

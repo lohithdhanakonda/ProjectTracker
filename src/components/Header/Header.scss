@@ -7,11 +7,12 @@
   padding-top: 20px;
 }
 .float-right{
-  float: right;
-  padding-right: 20px;
+  float: right!important;
+  padding: 15px 10px 10px 200px!important;
 }
 .header-row{
   background-color: aliceblue;
+  border-bottom: 1px solid;
 }
 .name-header{
   padding-left: 20px
