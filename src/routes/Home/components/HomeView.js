@@ -3,8 +3,9 @@ import '../styles/HomeStyles.scss'
 import PageTitle from '../../../components/PageTitle/PageTitle';
 import { TileLayout, TileLayoutItem } from 'pui-react-tile-layout';
 import { ClickableAltPanel } from 'pui-react-panels';
-import { Table, Navbar, Nav, NavItem} from 'react-bootstrap';
+import { Table, Navbar, Nav, NavItem, Modal, Button} from 'react-bootstrap';
 import { Draggable, Droppable } from 'react-drag-and-drop'
+import ModalPopup from './AddProjectPopup'
 
 const AlphaFilter = (props) => {
   var indexes = [];
@@ -97,6 +98,16 @@ class HomeView extends React.Component {
           DragProject={this.props.Drag_Project}
           ProjectDetailsView={this.props.Project_Details}
           FilterProject={this.props.filterProjects}/>
+
+          <ModalPopup showModal={this.props.showmodal}
+           action={this.props.Add_Project}
+           handleMultiSelectChange={this.props.handleMultiSelectChange}
+           handleStartDateChange={this.props.handleStartDateChange}
+           handleEndDateChange={this.props.handleEndDateChange}
+           handleSubmit={this.props.handleSubmit} 
+           handleChange={this.props.handleChange}
+           project={this.props.project}
+           resources={this.props.resources}/>
       </div>
     );
   }
