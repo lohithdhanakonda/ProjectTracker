@@ -5,6 +5,7 @@ import Project from './Project'
 import MainTask from './Task'
 import SubTask from './SubTask'
 import Employee from './Employee'
+import Login from './Login'
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 
@@ -16,7 +17,8 @@ export const createRoutes = (store) => ({
     Project(store),
     MainTask(store),
     SubTask(store),
-    Employee(store)
+    Employee(store),
+    Login(store)
   ]
 })
 
