@@ -1,21 +1,25 @@
-export const ACTION_TYPE = 'ACTION_TYPE'
+import ProjectsData from '../../../api/ProjectsData.json'
+import _ from  'lodash'
+export const LOAD_PROJECT = 'LOAD_PROJECT'
 
-export function ActionCreator() {
+export function LoadProjectDetails(id) {
     return (dispatch, getState) => {
         return new Promise((resolve) => {
             dispatch({
-                type: ACTION_TYPE,
-                payload: true
+                type: LOAD_PROJECT,
+                payload: _.filter(ProjectsData, { id: parseInt(id) })
             })
         })
     }
 }
 const ACTION_HANDLERS = {
-    [ACTION_TYPE]: (state, action) => {
-        return Object.assign({}, state)
+    [LOAD_PROJECT]: (state, action) => {
+        return Object.assign({}, state, { project: action.payload[0] })
     }
 }
-const initialState = 0
+const initialState = {
+    project: {}
+}
 
 export default function projectReducer(state = initialState, action) {
     const handler = ACTION_HANDLERS[action.type];
