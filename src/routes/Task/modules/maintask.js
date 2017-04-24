@@ -4,14 +4,15 @@ export const LOAD_TASK_DETAILS = 'LOAD_TASK_DETAILS'
 
 //action creators
 export function LoadTaskDetails(projectid, taskid) {
+    
     return (dispatch, getState) => {
         return new Promise((resolve) => {
             dispatch({
                 type: LOAD_TASK_DETAILS,
                 payload: _.filter(
-                    (_.filter(ProjectsData, { id: parseInt(projectid) })).maintasks,
+                    (_.filter(ProjectsData, { id: parseInt(projectid) }))[0].maintasks,
                     { id: parseInt(taskid) }
-                )
+                )[0]
             })
         })
     }
