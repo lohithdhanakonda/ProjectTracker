@@ -114,19 +114,17 @@ class ProjectsView extends React.Component {
   }
 }
 
-class HomeView extends React.Component {
-  render() {
+const HomeView=(props)=> {
     return (
       <div className="homeview">
         <ProjectsView
-          Projects={this.props.projects}
-          AddProject={this.props.Add_Project}
-          DragProject={this.props.Drag_Project}
-          ProjectDetailsView={this.props.Project_Details}
-          FilterProject={this.props.filterProjects}/>
+          Projects={props.projects}
+          AddProject={props.Add_Project}
+          DragProject={props.Drag_Project}
+          ProjectDetailsView={props.Project_Details}
+          FilterProject={props.filterProjects}/>
       </div>
     );
-  }
 }
 
 export default HomeView

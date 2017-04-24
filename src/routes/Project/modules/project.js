@@ -7,14 +7,14 @@ export function LoadProjectDetails(id) {
         return new Promise((resolve) => {
             dispatch({
                 type: LOAD_PROJECT,
-                payload:  _.filter(ProjectsData, { id: parseInt(id) })
+                payload: _.filter(ProjectsData, { id: parseInt(id) })
             })
         })
     }
 }
 const ACTION_HANDLERS = {
     [LOAD_PROJECT]: (state, action) => {
-        return Object.assign({}, state, { project: action.payload })
+        return Object.assign({}, state, { project: action.payload[0] })
     }
 }
 const initialState = {

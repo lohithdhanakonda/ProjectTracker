@@ -1,6 +1,6 @@
 [
     {
-        "id":1,
+        "id": 1,
         "name": "bridg-admin",
         "startdate": "21/01/2013",
         "enddate": null,
@@ -57,23 +57,79 @@
         "maintasks": [
             {
                 "id": 1,
-                "name": "estimations, requirements discussion"
+                "name": "estimations, requirements discussion",
+                "startdate": "21/01/2013",
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "name": "subtask1",
+                        "startdate": null
+                    },
+                    {
+                        "id": 2,
+                        "name": "subtask2",
+                        "startdate": "21/01/2013"
+                    },
+                    {
+                        "id": 3,
+                        "name": "subtask3",
+                        "startdate": "21/01/2013",
+                        "enddate": "21/01/2015"
+                    }
+                ]
             },
             {
                 "id": 2,
-                "name": "designing"
+                "name": "designing",
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "name": "subtask1",
+                        "startdate": null
+                    },
+                    {
+                        "id": 2,
+                        "name": "subtask2",
+                        "startdate": "21/01/2013"
+                    },
+                    {
+                        "id": 3,
+                        "name": "subtask3",
+                        "startdate": "21/01/2013",
+                        "enddate": "21/01/2015"
+                    }
+                ]
             },
             {
                 "id": 3,
-                "name": "developing"
+                "name": "developing",
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "name": "subtask1",
+                        "startdate": null
+                    },
+                    {
+                        "id": 2,
+                        "name": "subtask2",
+                        "startdate": "21/01/2013"
+                    },
+                    {
+                        "id": 3,
+                        "name": "subtask3",
+                        "startdate": "21/01/2013",
+                        "enddate": "21/01/2015"
+                    }
+                ]
             },
             {
                 "id": 4,
                 "name": "unit testing"
             }
         ]
-    },{
-        "id":2,
+    },
+    {
+        "id": 2,
         "name": "bridg-email-designer",
         "startdate": "21/01/2013",
         "enddate": null,
@@ -130,23 +186,97 @@
         "maintasks": [
             {
                 "id": 1,
-                "name": "estimations, requirements discussion"
+                "name": "estimations, requirements discussion",
+                "startdate": "21/01/2013",
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "name": "subtask1",
+                        "startdate": null
+                    },
+                    {
+                        "id": 2,
+                        "name": "subtask2",
+                        "startdate": "21/01/2013"
+                    },
+                    {
+                        "id": 3,
+                        "name": "subtask3",
+                        "startdate": "21/01/2013",
+                        "enddate": "21/01/2015"
+                    }
+                ]
             },
             {
                 "id": 2,
-                "name": "designing"
+                "name": "designing",
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "name": "subtask1",
+                        "startdate": null
+                    },
+                    {
+                        "id": 2,
+                        "name": "subtask2",
+                        "startdate": "21/01/2013"
+                    },
+                    {
+                        "id": 3,
+                        "name": "subtask3",
+                        "startdate": "21/01/2013",
+                        "enddate": "21/01/2015"
+                    }
+                ]
             },
             {
                 "id": 3,
-                "name": "developing"
+                "name": "developing",
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "name": "subtask1",
+                        "startdate": null
+                    },
+                    {
+                        "id": 2,
+                        "name": "subtask2",
+                        "startdate": "21/01/2013"
+                    },
+                    {
+                        "id": 3,
+                        "name": "subtask3",
+                        "startdate": "21/01/2013",
+                        "enddate": "21/01/2015"
+                    }
+                ]
             },
             {
                 "id": 4,
-                "name": "unit testing"
+                "name": "unit testing",
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "name": "subtask1",
+                        "startdate": null
+                    },
+                    {
+                        "id": 2,
+                        "name": "subtask2",
+                        "startdate": "21/01/2013"
+                    },
+                    {
+                        "id": 3,
+                        "name": "subtask3",
+                        "startdate": "21/01/2013",
+                        "enddate": "21/01/2015"
+                    }
+                ]
             }
         ]
-    },{
-        "id":3,
+    },
+    {
+        "id": 3,
         "name": "bridg-www2",
         "startdate": "21/01/2013",
         "enddate": null,
@@ -203,19 +333,92 @@
         "maintasks": [
             {
                 "id": 1,
-                "name": "estimations, requirements discussion"
+                "name": "estimations, requirements discussion",
+                "startdate": "21/01/2013",
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "name": "subtask1",
+                        "startdate": null
+                    },
+                    {
+                        "id": 2,
+                        "name": "subtask2",
+                        "startdate": "21/01/2013"
+                    },
+                    {
+                        "id": 3,
+                        "name": "subtask3",
+                        "startdate": "21/01/2013",
+                        "enddate": "21/01/2015"
+                    }
+                ]
             },
             {
                 "id": 2,
-                "name": "designing"
+                "name": "designing",
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "name": "subtask1",
+                        "startdate": null
+                    },
+                    {
+                        "id": 2,
+                        "name": "subtask2",
+                        "startdate": "21/01/2013"
+                    },
+                    {
+                        "id": 3,
+                        "name": "subtask3",
+                        "startdate": "21/01/2013",
+                        "enddate": "21/01/2015"
+                    }
+                ]
             },
             {
                 "id": 3,
-                "name": "developing"
+                "name": "developing",
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "name": "subtask1",
+                        "startdate": null
+                    },
+                    {
+                        "id": 2,
+                        "name": "subtask2",
+                        "startdate": "21/01/2013"
+                    },
+                    {
+                        "id": 3,
+                        "name": "subtask3",
+                        "startdate": "21/01/2013",
+                        "enddate": "21/01/2015"
+                    }
+                ]
             },
             {
                 "id": 4,
-                "name": "unit testing"
+                "name": "unit testing",
+                "subtasks": [
+                    {
+                        "id": 1,
+                        "name": "subtask1",
+                        "startdate": null
+                    },
+                    {
+                        "id": 2,
+                        "name": "subtask2",
+                        "startdate": "21/01/2013"
+                    },
+                    {
+                        "id": 3,
+                        "name": "subtask3",
+                        "startdate": "21/01/2013",
+                        "enddate": "21/01/2015"
+                    }
+                ]
             }
         ]
     }
