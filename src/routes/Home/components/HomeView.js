@@ -1,11 +1,12 @@
-import React from 'react'
-import '../styles/HomeStyles.scss'
+import React from 'react';
+import '../styles/HomeStyles.scss';
 import PageTitle from '../../../components/PageTitle/PageTitle';
 import { TileLayout, TileLayoutItem } from 'pui-react-tile-layout';
 import { ClickableAltPanel } from 'pui-react-panels';
 import { Table, Navbar, Nav, NavItem, Tooltip, OverlayTrigger, Modal, Button} from 'react-bootstrap';
-import { Draggable, Droppable } from 'react-drag-and-drop'
-import { Link, browserHistory } from 'react-router'
+import { Draggable, Droppable } from 'react-drag-and-drop';
+import ModalPopup from './AddProjectPopup';
+import {browserHistory} from 'react-router';
 
 const AlphaFilter = (props) => {
   var indexes = [];
@@ -145,6 +146,16 @@ const HomeView = (props) => {
         </Modal.Footer>
       </Modal>
     </div>
+    <ModalPopup showModal={this.props.showmodal}
+           action={this.props.Add_Project}
+           handleMultiSelectChange={this.props.handleMultiSelectChange}
+           handleStartDateChange={this.props.handleStartDateChange}
+           handleEndDateChange={this.props.handleEndDateChange}
+           handleSubmit={this.props.handleSubmit} 
+           handleChange={this.props.handleChange}
+           project={this.props.project}
+           resources={this.props.resources}/>
+
   );
 }
 
