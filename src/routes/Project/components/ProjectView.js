@@ -21,15 +21,6 @@ export default class ProjectView extends React.Component {
     }
 
     render() {
-        let button=null;
-        var canedit;
-        if (this.props.canEdit) {
-          canedit = false;
-          button=  <span className='splitButton'><button type="button" className='btn btn-primary btn-large'>Save</button></span>
-        } else {
-            canedit = true;
-          button=  <span className='splitButton'><button type="button" className='btn btn-primary btn-large' onClick={this.props.handleEdit}>Edit</button></span>
-        }
         return (
             <div>
                 <form  key={this.props.project.id}>
@@ -42,11 +33,11 @@ export default class ProjectView extends React.Component {
                         <FormControl type="text" placeholder="Client Name" name="clientname" onChange={this.props.handleChange.bind(this)} defaultValue={this.props.project.clientname} disabled="true"/>
                     </FormGroup>
                        <FormGroup controlId="status">
-                          <Checkbox inline name="status" onChange={this.props.handleChange.bind(this)} defaultValue={this.props.project.status}  disabled={canedit}>Project Archive</Checkbox>
+                          <Checkbox inline name="status" onChange={this.props.handleChange.bind(this)} defaultValue={this.props.project.status}  disabled={this.props.canEdit?false:true}>Project Archive</Checkbox>
                           </FormGroup>
                     <FormGroup controlId="employees">
                         <ControlLabel>Employees</ControlLabel>
-                        <FormControl componentClass="select" multiple onChange={this.props.handleMultiSelectChange.bind(this)}  defaultValue={this.props.project.resources} disabled={canedit}>
+                        <FormControl componentClass="select" multiple onChange={this.props.handleMultiSelectChange.bind(this)}  defaultValue={this.props.project.resources} disabled={this.props.canEdit?false:true}>
                             {
                                 this.props.resources.map((resource) => <option key={resource.id} value={resource.id} id={resource.id}>{resource.name}</option>)
                             }
@@ -57,21 +48,21 @@ export default class ProjectView extends React.Component {
                         <div>
                         <ControlLabel>Start Date:</ControlLabel>
                         </div>
-                        <DatePicker selected={this.props.project.startDate} onChange={this.props.handleStartDateChange.bind(this)} dateFormat={DATEFORMAT} disabled={canedit} />
+                        <DatePicker selected={this.props.project.startDate} onChange={this.props.handleStartDateChange.bind(this)} dateFormat={DATEFORMAT} disabled={this.props.canEdit?false:true} />
                     </FormGroup>
                     <FormGroup controlId="end_date">
                         <div>
                         <ControlLabel>Expected End Date:</ControlLabel>
                         </div>
-                        <DatePicker selected={this.props.project.endDate} onChange={this.props.handleEndDateChange.bind(this)} dateFormat={DATEFORMAT} disabled={canedit}/>
+                        <DatePicker selected={this.props.project.endDate} onChange={this.props.handleEndDateChange.bind(this)} dateFormat={DATEFORMAT} disabled={this.props.canEdit?false:true}/>
                     </FormGroup>
                     </div>
                     <FormGroup controlId="description">
                         <ControlLabel>Description</ControlLabel>
-                        <FormControl componentClass="textarea" name="description" placeholder="Project Description" onChange={this.props.handleChange.bind(this)}  defaultValue={this.props.project.description} disabled={canedit}/>
+                        <FormControl componentClass="textarea" name="description" placeholder="Project Description" onChange={this.props.handleChange.bind(this)}  defaultValue={this.props.project.description} disabled={this.props.canEdit?false:true}/>
                     </FormGroup>
                     <div >{
-                        button
+                        this.props.canEdit?<span className='splitButton'><button type="button" className='btn btn-primary btn-large'>Save</button></span>:<span className='splitButton'><button type="button" className='btn btn-primary btn-large' onClick={this.props.handleEdit}>Edit</button></span>
                     }
                     </div>
                 </form>
