@@ -20,11 +20,15 @@ class AddProjectView extends React.Component {
                         <ControlLabel>Name</ControlLabel>
                         <FormControl type="text" placeholder="Project Name" name="name" onChange={this.props.handleChange.bind(this)}/>
                     </FormGroup>
+                    <FormGroup controlId="client_name">
+                        <ControlLabel>Client Name</ControlLabel>
+                        <FormControl type="text" placeholder="Client Name" name="clientname" onChange={this.props.handleChange.bind(this)}/>
+                    </FormGroup>
                     <FormGroup controlId="employees">
                         <ControlLabel>Employees</ControlLabel>
                         <FormControl componentClass="select" multiple onChange={this.props.handleMultiSelectChange.bind(this)} value={this.props.project.resources}>
                             {
-                                this.props.resources.map((resource) => <option key={resource.id} value={resource.id}>{resource.name}</option>)
+                                this.props.resources.map((resource) => <option key={resource.id} value={resource.id} id={resource.id}>{resource.name}</option>)
                             }
                         </FormControl>
                     </FormGroup>

@@ -76,12 +76,11 @@ export function Project_Details(id) {
 
 //ADD & EDIT POPUP  RELATED FUNCTION
 export function handleMultiSelectChange(e) {
-    debugger;
     var options = e.target.options;
     var selectedvalues = [];
     for (var i = 0, l = options.length; i < l; i++) {
         if (options[i].selected) {
-            selectedvalues.push(options[i].value);
+            selectedvalues.push(options[i].id);
         }
     }
     return (dispatch, getState) => {
@@ -97,7 +96,6 @@ export function handleMultiSelectChange(e) {
     }
 }
 export function handleChange(e) {
-    debugger;
     return (dispatch, getState) => {
         return new Promise((resolve) => {
             dispatch({
@@ -111,7 +109,6 @@ export function handleChange(e) {
     }
 }
 export function handleStartDateChange(startDate) {
-    debugger;
     let value = startDate;
     return (dispatch, getState) => {
         return new Promise((resolve) => {
@@ -141,7 +138,6 @@ export function handleEndDateChange(endDate) {
 
 }
 export function handleSubmit(e) {
-    debugger;
     return {
         type: HANDLE_SUBMIT
     }
@@ -165,7 +161,6 @@ export function handleSubmit(e) {
         },
 
         ADD_PROJECT: (state, action) => {
-            debugger;
             let showmodal = state.showModal
             return Object.assign({}, state, { showModal: !showmodal })
         },
@@ -187,19 +182,16 @@ export function handleSubmit(e) {
             return Object.assign({}, state, { project: newSelected });
         },
         HANDLE_STARTDATE_CHANGE: (state, action) => {
-            debugger;
             let newSelected = _.extend({}, state.project);
             newSelected[action.payload.key] = action.payload.value;
             return Object.assign({}, state, { project: newSelected });
         },
         HANDLE_ENDDATE_CHANGE: (state, action) => {
-            debugger;
             let newSelected = _.extend({}, state.project);
             newSelected[action.payload.key] = action.payload.value;
             return Object.assign({}, state, { project: newSelected });
         },
         HANDLE_SUBMIT: (state, action) => {
-            debugger;
             console.log(state.project);
             return Object.assign({}, state, { project: project });
         }
@@ -207,6 +199,7 @@ export function handleSubmit(e) {
     }
     const project = {
     name: '',
+    clientname:'',
     resources: [],
     startDate: moment(),
     endDate: moment(),

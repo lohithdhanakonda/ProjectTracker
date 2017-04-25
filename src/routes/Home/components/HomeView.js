@@ -1,11 +1,12 @@
-import React from 'react'
-import '../styles/HomeStyles.scss'
+import React from 'react';
+import '../styles/HomeStyles.scss';
 import PageTitle from '../../../components/PageTitle/PageTitle';
 import { TileLayout, TileLayoutItem } from 'pui-react-tile-layout';
 import { ClickableAltPanel } from 'pui-react-panels';
 import { Table, Navbar, Nav, NavItem, Modal, Button} from 'react-bootstrap';
-import { Draggable, Droppable } from 'react-drag-and-drop'
-import ModalPopup from './AddProjectPopup'
+import { Draggable, Droppable } from 'react-drag-and-drop';
+import ModalPopup from './AddProjectPopup';
+import {browserHistory} from 'react-router';
 
 const AlphaFilter = (props) => {
   var indexes = [];
@@ -25,7 +26,7 @@ class ChildTileLayoutItem extends React.Component {
     return (
       <Draggable className="arrangeTiles" type='project' data={this.props.Project.id}>
         <TileLayoutItem>
-          <ClickableAltPanel key={this.props.Project.id} onClick={() => this.props.ProjectDetailsView(this.props.Project.id) }>
+          <ClickableAltPanel key={this.props.Project.id} onClick={() => browserHistory.push('/project/' + this.props.Project.id) }>
             <div>
               ProjectName: {this.props.Project.name}
               <div className="table-div">
