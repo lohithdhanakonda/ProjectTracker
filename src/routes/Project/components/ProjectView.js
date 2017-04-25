@@ -3,6 +3,7 @@ import '../styles/ProjectStyles.scss';
 import 'react-select/dist/react-select.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import PageTitle from '../../../components/PageTitle/PageTitle';
+import './ProjectHomeStyles.scss'
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import { Link, browserHistory } from 'react-router';
@@ -15,6 +16,7 @@ const DATEFORMAT = 'YYYY/MM/DD'
 
 export default class ProjectView extends React.Component {
 
+
     componentDidMount() {
         let id = this.props.params.projectid;
         this.props.loadProjectDetails(id);
@@ -23,6 +25,7 @@ export default class ProjectView extends React.Component {
     render() {
         return (
             <div>
+ <PageTitle title={this.props.project.name}></PageTitle> 
                 <form  key={this.props.project.id}>
                     <FormGroup controlId="name">
                         <ControlLabel>Name</ControlLabel>
@@ -66,6 +69,15 @@ export default class ProjectView extends React.Component {
                     }
                     </div>
                 </form>
+ <div>
+                    {this.props
+                        && this.props.project
+                        && this.props.project.project
+                        && this.props.project.project.maintasks
+                        ? this.props.project.project.maintasks.map((task) => (
+                            <span><a onClick={()=>browserHistory.push('/maintask/'+this.props.project.project.id+'/'+task.id)}>{task.name}</a><br /></span>
+                        )) : null}
+                </div>
             </div>
         )
     }

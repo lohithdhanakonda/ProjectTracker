@@ -92,6 +92,14 @@
     background-color:#eaeaea ;
     
 }
+
+.project-name{
+    width:300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    white-space:nowrap
+}
 .splitButton{
   padding-right: 15px;
 }

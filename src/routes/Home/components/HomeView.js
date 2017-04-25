@@ -3,7 +3,7 @@ import '../styles/HomeStyles.scss';
 import PageTitle from '../../../components/PageTitle/PageTitle';
 import { TileLayout, TileLayoutItem } from 'pui-react-tile-layout';
 import { ClickableAltPanel } from 'pui-react-panels';
-import { Table, Navbar, Nav, NavItem, Modal, Button} from 'react-bootstrap';
+import { Table, Navbar, Nav, NavItem, Tooltip, OverlayTrigger, Modal, Button} from 'react-bootstrap';
 import { Draggable, Droppable } from 'react-drag-and-drop';
 import ModalPopup from './AddProjectPopup';
 import {browserHistory} from 'react-router';
@@ -28,7 +28,11 @@ class ChildTileLayoutItem extends React.Component {
         <TileLayoutItem>
           <ClickableAltPanel key={this.props.Project.id} onClick={() => browserHistory.push('/project/' + this.props.Project.id) }>
             <div>
-              ProjectName: {this.props.Project.name}
+              <div className="project-name">
+                <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip">{this.props.Project.name}</Tooltip>}>
+                  <strong>{this.props.Project.name}</strong>
+                </OverlayTrigger>
+              </div>
               <div className="table-div">
                 <Table responsive>
                   <thead>
@@ -50,7 +54,7 @@ class ChildTileLayoutItem extends React.Component {
             </div>
           </ClickableAltPanel>
         </TileLayoutItem>
-      </Draggable>
+      </Draggable >
     );
   }
 }
@@ -58,8 +62,10 @@ class ChildTileLayoutItem extends React.Component {
 class ProjectsView extends React.Component {
   render() {
     return (<div>
+
       <div className="row">
-        <AlphaFilter FilterProject={this.props.FilterProject} />
+        <AlphaFilter  FilterProject={this.props.FilterProject}/>
+
         <div>
           <div className="col-lg-8 col-md-8 col-sm-6 col-xs-6">
             <div className="projects-view">
@@ -89,29 +95,48 @@ class ProjectsView extends React.Component {
   }
 }
 
-class HomeView extends React.Component {
-  render() {
-    return (
-      <div className="homeview">
-        <ProjectsView
-          Projects={this.props.filteredprojects}
-          AddProject={this.props.Add_Project}
-          DragProject={this.props.Drag_Project}
-          ProjectDetailsView={this.props.Project_Details}
-          FilterProject={this.props.filterProjects}/>
+const HomeView = (props) => {
+  return (
+    <div className="homeview">
+      <ProjectsView
+        Projects={props.projectsData
+          && props.projectsData.archievedProjects
+          && props.projectsData.showArchieve
+          ? props.projectsData.archievedProjects : props.projectsData.projects}
+        AddProject={props.Add_Project}
+        DragProject={props.Archieve_Project}
+        ProjectDetailsView={props.Project_Details}
+        FilterProject={props.filterProjects}/>
+      {props.projectsData && props.projectsData.archievedProjects ?
+        <div>
+          <a onClick={() => props.ShowArchieveProjects() }>
+            {!props.projectsData.showArchieve ? <span>Show Archieved projects</span> : <span>Hide Archieved projects</span>}
+          </a>
+        </div> : null}
+      <Modal show={props.projectsData.deleteModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        Are you sure to archieve?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={() => props.ArchiveProjectConfirmed() }>Archieve</Button>
+          <Button onClick={() => props.Archieve_Project() }>Close</Button>
+        </Modal.Footer>
+      </Modal>
+      <ModalPopup showModal={props.showmodal}
+        action={props.Add_Project}
+        handleMultiSelectChange={props.handleMultiSelectChange}
+        handleStartDateChange={props.handleStartDateChange}
+        handleEndDateChange={props.handleEndDateChange}
+        handleSubmit={props.handleSubmit}
+        handleChange={props.handleChange}
+        project={props.project}
+        resources={props.resources}/>
+    </div>
 
-          <ModalPopup showModal={this.props.showmodal}
-           action={this.props.Add_Project}
-           handleMultiSelectChange={this.props.handleMultiSelectChange}
-           handleStartDateChange={this.props.handleStartDateChange}
-           handleEndDateChange={this.props.handleEndDateChange}
-           handleSubmit={this.props.handleSubmit} 
-           handleChange={this.props.handleChange}
-           project={this.props.project}
-           resources={this.props.resources}/>
-      </div>
-    );
-  }
+  );
 }
 
 export default HomeView
