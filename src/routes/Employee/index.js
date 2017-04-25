@@ -1,7 +1,6 @@
 import { injectReducer } from '../../store/reducers'
-import {LoadProjects} from './modules/home.js'
 export default (store) => ({
-  path: 'home',
+  path: 'employee',
   /*  Async getComponent is only invoked when route matches   */
   getComponent(nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point
@@ -9,16 +8,16 @@ export default (store) => ({
     require.ensure([], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const Home = require('./containers/HomeContainer').default
-      const homeReducer = require('./modules/home').default
+      const Employee = require('./container/EmployeeContainer').default
+      const employeeReducer = require('./modules/employee').default
 
       /*  Add the reducer to the store on key 'project'  */
-      injectReducer(store, { key: 'home', reducer: homeReducer })
-      store.dispatch(LoadProjects())
+      injectReducer(store, { key: 'employee', reducer: employeeReducer })
+
       /*  Return getComponent   */
-      cb(null, Home)
+      cb(null, Employee)
 
       /* Webpack named bundle   */
-    }, 'home')
+    }, 'employee')
   }
 })
