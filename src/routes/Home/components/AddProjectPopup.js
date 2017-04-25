@@ -11,39 +11,40 @@ import {form, FormGroup, ControlLabel, FormControl, Modal} from 'react-bootstrap
 const DATEFORMAT = 'YYYY/MM/DD'
 
 
-const AddProjectView = (props) => {
+class AddProjectView extends React.Component {
+  render() {
     return (
         <div>
-            <form onSubmit={props.handleSubmit.bind(this) }>
+            <form onSubmit={this.props.handleSubmit.bind(this) }>
                 <FormGroup controlId="name">
                     <ControlLabel>Name</ControlLabel>
-                    <FormControl type="text" placeholder="Project Name" name="name" onChange={props.handleChange.bind(this) }/>
+                    <FormControl type="text" placeholder="Project Name" name="name" onChange={this.props.handleChange.bind(this) }/>
                 </FormGroup>
                 <FormGroup controlId="client_name">
                     <ControlLabel>Client Name</ControlLabel>
-                    <FormControl type="text" placeholder="Client Name" name="clientname" onChange={props.handleChange.bind(this) }/>
+                    <FormControl type="text" placeholder="Client Name" name="clientname" onChange={this.props.handleChange.bind(this) }/>
                 </FormGroup>
                 <FormGroup controlId="employees">
                     <ControlLabel>Employees</ControlLabel>
-                    <FormControl componentClass="select" multiple onChange={props.handleMultiSelectChange.bind(this) } value={props.project.resources}>
+                    <FormControl componentClass="select" multiple onChange={this.props.handleMultiSelectChange.bind(this) } value={this.props.project.resources}>
                         {
-                            props.resources.map((resource) => <option key={resource.id} value={resource.id} id={resource.id}>{resource.name}</option>)
+                            this.props.resources.map((resource) => <option key={resource.id} value={resource.id} id={resource.id}>{resource.name}</option>)
                         }
                     </FormControl>
                 </FormGroup>
                 <div>
                     <FormGroup controlId="start_date">
                         <ControlLabel>Start Date: </ControlLabel>
-                        <DatePicker selected={props.project.startDate} onChange={props.handleStartDateChange.bind(this) } dateFormat={DATEFORMAT} />
+                        <DatePicker selected={this.props.project.startDate} onChange={this.props.handleStartDateChange.bind(this) } dateFormat={DATEFORMAT} />
                     </FormGroup>
                     <FormGroup controlId="end_date">
                         <ControlLabel>Expected End Date: </ControlLabel>
-                        <DatePicker selected={props.project.endDate} onChange={props.handleEndDateChange.bind(this) } dateFormat={DATEFORMAT} />
+                        <DatePicker selected={this.props.project.endDate} onChange={this.props.handleEndDateChange.bind(this) } dateFormat={DATEFORMAT} />
                     </FormGroup>
                 </div>
                 <FormGroup controlId="description">
                     <ControlLabel>Description</ControlLabel>
-                    <FormControl componentClass="textarea" name="description" placeholder="Project Description" onChange={props.handleChange.bind(this) }/>
+                    <FormControl componentClass="textarea" name="description" placeholder="Project Description" onChange={this.props.handleChange.bind(this) }/>
                 </FormGroup>
                 <div>
                     <span className='splitButton'><button type="submit" className='btn btn-primary btn-large'>Submit</button></span>
@@ -51,6 +52,7 @@ const AddProjectView = (props) => {
             </form>
         </div>
     )
+}
 }
 
 const ModalPopup = (props) => {

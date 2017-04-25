@@ -4,8 +4,12 @@
         "name": "bridg-admin",
         "startdate": "21/01/2013",
         "enddate": null,
+        "clientname": "test",
+        "description": "test data1",
+        "status": 0,
         "resources": [
             {
+                "id": 1,
                 "name": "sai",
                 "workingfrom": "21/02/2013",
                 "currentmodule": "Campaigns",
@@ -18,6 +22,7 @@
                 ]
             },
             {
+                "id": 2,
                 "name": "bhagi",
                 "workingfrom": "21/02/2013",
                 "currentmodule": "Campaigns",
@@ -30,18 +35,7 @@
                 ]
             },
             {
-                "name": "teja",
-                "workingfrom": "21/02/2013",
-                "currentmodule": "Campaigns",
-                "currenttask": "creating grid",
-                "technologystack": [
-                    {
-                        "techid": 1,
-                        "technology": "C#"
-                    }
-                ]
-            },
-            {
+                "id": 4,
                 "name": "ganesh",
                 "workingfrom": "21/02/2013",
                 "currentmodule": "Campaigns",
@@ -133,32 +127,12 @@
         "name": "bridg-email-designer",
         "startdate": "21/01/2013",
         "enddate": null,
+        "clientname": "zc",
+        "description": "test data",
+        "status": 0,
         "resources": [
             {
-                "name": "sai",
-                "workingfrom": "21/02/2013",
-                "currentmodule": "Campaigns",
-                "currenttask": "creating grid",
-                "technologystack": [
-                    {
-                        "techid": 1,
-                        "technology": "C#"
-                    }
-                ]
-            },
-            {
-                "name": "bhagi",
-                "workingfrom": "21/02/2013",
-                "currentmodule": "Campaigns",
-                "currenttask": "creating grid",
-                "technologystack": [
-                    {
-                        "techid": 1,
-                        "technology": "C#"
-                    }
-                ]
-            },
-            {
+                "id": 3,
                 "name": "teja",
                 "workingfrom": "21/02/2013",
                 "currentmodule": "Campaigns",
@@ -171,6 +145,7 @@
                 ]
             },
             {
+                "id": 4,
                 "name": "ganesh",
                 "workingfrom": "21/02/2013",
                 "currentmodule": "Campaigns",
@@ -280,8 +255,12 @@
         "name": "bridg-www2",
         "startdate": "21/01/2013",
         "enddate": null,
+        "clientname": "bridg",
+        "description": "test data",
+        "status": 1,
         "resources": [
             {
+                "id": 1,
                 "name": "sai",
                 "workingfrom": "21/02/2013",
                 "currentmodule": "Campaigns",
@@ -294,31 +273,8 @@
                 ]
             },
             {
+                "id": 2,
                 "name": "bhagi",
-                "workingfrom": "21/02/2013",
-                "currentmodule": "Campaigns",
-                "currenttask": "creating grid",
-                "technologystack": [
-                    {
-                        "techid": 1,
-                        "technology": "C#"
-                    }
-                ]
-            },
-            {
-                "name": "teja",
-                "workingfrom": "21/02/2013",
-                "currentmodule": "Campaigns",
-                "currenttask": "creating grid",
-                "technologystack": [
-                    {
-                        "techid": 1,
-                        "technology": "C#"
-                    }
-                ]
-            },
-            {
-                "name": "ganesh",
                 "workingfrom": "21/02/2013",
                 "currentmodule": "Campaigns",
                 "currenttask": "creating grid",

@@ -80,6 +80,7 @@ export function filterProjects(value) {
     }
 }
 export function Add_Project() {
+    debugger;
     return (dispatch, getState) => {
         return new Promise((resolve) => {
             dispatch({
@@ -197,20 +198,17 @@ const ACTION_HANDLERS = {
     },
     [ARCHIVE_PROJECT]: (state, action) => {
         let newState = Object.assign({}, state);
-        let updatedProjs = []
-        let archievProjects = []
-        newState.archievedProjects.map((proj) => {
-            archievProjects.push(proj)
-        })
+        // let updatedProjs = []
+        // let archievProjects = []
+        // newState.archievedProjects.map((proj) => {
+        //     archievProjects.push(proj)
+        // })
         newState.projects.map((proj) => {
-            if (proj.id != state.archieveProjectId) {
-                updatedProjs.push(proj)
-            }
-            else {
-                archievProjects.push(proj)
+            if (proj.id == state.archieveProjectId) {
+                proj.status=1
             }
         })
-        return Object.assign({}, newState, { projects: updatedProjs, archievedProjects: archievProjects, deleteModal: !state.deleteModal })
+        return Object.assign({}, state ,{projects: newState.projects})
     },
     [ADD_PROJECT]: (state, action) => {
         return Object.assign({}, state, { showModal: !state.showModal })

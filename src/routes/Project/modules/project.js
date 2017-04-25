@@ -19,6 +19,7 @@ const project = {
     startDate: moment(),
     endDate: moment(),
     description: '',
+    status:0
 }
 
 const initialState = {
@@ -28,7 +29,8 @@ const initialState = {
 }
 
 export function loadProjectDetails(id) {
-    let projectData = ProjectsDetails.filter(project => {
+    debugger;
+    let projectData = ProjectsData.filter(project => {
         if (project.id == id)
             return project;
     });
