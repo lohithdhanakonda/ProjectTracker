@@ -1,18 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import HomeView from '../components/HomeView.js'
-import {Drag_Project, Add_Project, Project_Details, filterProjects} from '../modules/home.js'
+import {Archieve_Project, Add_Project,ArchiveProjectConfirmed, Project_Details, filterProjects,ShowArchieveProjects} from '../modules/home.js'
 
 const mapStateToProps = (state) => ({
-    projects: state.home.projects,
-    filteredprojects: state.home.filteredProjects
+    projectsData: state.home
 })
 
 const mapDispatchToProps = {
-    Drag_Project,
+    Archieve_Project,
     Add_Project,
     Project_Details,
-    filterProjects
+    filterProjects,
+    ShowArchieveProjects,
+    ArchiveProjectConfirmed
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeView)

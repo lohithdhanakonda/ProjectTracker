@@ -3,7 +3,7 @@ import '../styles/HomeStyles.scss'
 import PageTitle from '../../../components/PageTitle/PageTitle';
 import { TileLayout, TileLayoutItem } from 'pui-react-tile-layout';
 import { ClickableAltPanel } from 'pui-react-panels';
-import { Table, Navbar, Nav, NavItem, Tooltip, OverlayTrigger} from 'react-bootstrap';
+import { Table, Navbar, Nav, NavItem, Tooltip, OverlayTrigger, Modal, Button} from 'react-bootstrap';
 import { Draggable, Droppable } from 'react-drag-and-drop'
 import { Link, browserHistory } from 'react-router'
 
@@ -35,6 +35,7 @@ class NavbarInstance extends React.Component {
             </div>
           </Droppable>
         </div>
+
       </div>
     );
   }
@@ -114,17 +115,37 @@ class ProjectsView extends React.Component {
   }
 }
 
-const HomeView=(props)=> {
-    return (
-      <div className="homeview">
-        <ProjectsView
-          Projects={props.projects}
-          AddProject={props.Add_Project}
-          DragProject={props.Drag_Project}
-          ProjectDetailsView={props.Project_Details}
-          FilterProject={props.filterProjects}/>
-      </div>
-    );
+const HomeView = (props) => {
+  return (
+    <div className="homeview">
+      <ProjectsView
+        Projects={props.projectsData
+          && props.projectsData.archievedProjects
+          && props.projectsData.showArchieve
+          ? props.projectsData.archievedProjects : props.projectsData.projects}
+        AddProject={props.Add_Project}
+        DragProject={props.Archieve_Project}
+        ProjectDetailsView={props.Project_Details}
+        FilterProject={props.filterProjects}/>
+      {props.projectsData && props.projectsData.archievedProjects ?
+        <div>
+          <a onClick={() => props.ShowArchieveProjects() }>
+            {!props.projectsData.showArchieve? <span>Show Archieved projects</span>:<span>Hide Archieved projects</span>}
+          </a>
+        </div> : null}
+      <Modal show={props.projectsData.deleteModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={()=>props.ArchiveProjectConfirmed()}>Archieve</Button>
+          <Button onClick={()=>props.Archieve_Project()}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
+  );
 }
 
 export default HomeView

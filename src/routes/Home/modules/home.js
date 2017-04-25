@@ -7,7 +7,8 @@ export const LOAD_PROJECTS = 'LOAD_PROJECTS'
 export const ARCHIVE_PROJECT = 'ARCHIVE_PROJECT'
 export const ADD_PROJECT = 'ADD_PROJECT'
 export const PROJECT_DETAILS = 'PROJECT_DETAILS'
-
+export const ARCHIVE_CONFIRMATION = 'ARCHIVE_CONFIRMATION'
+export const SHOW_ARCHIEVE = 'SHOW_ARCHIEVE'
 export function LoadProjects() {
     return {
         type: LOAD_PROJECTS,
@@ -15,15 +16,33 @@ export function LoadProjects() {
     }
 }
 
-export function NavigateToProject(id) {
-
-}
-export function Drag_Project(event) {
+export function ArchiveProjectConfirmed() {
+    debugger
     return (dispatch, getState) => {
         return new Promise((resolve) => {
             dispatch({
-                type: ARCHIVE_PROJECT,
-                payload: event.project
+                type: ARCHIVE_PROJECT
+            })
+        })
+    }
+}
+export function Archieve_Project(event) {
+    debugger
+    return (dispatch, getState) => {
+        return new Promise((resolve) => {
+            dispatch({
+                type: ARCHIVE_CONFIRMATION,
+                payload: event && event.project ? event.project : null
+            })
+        })
+    }
+}
+export function ShowArchieveProjects() {
+    debugger
+    return (dispatch, getState) => {
+        return new Promise((resolve) => {
+            dispatch({
+                type: SHOW_ARCHIEVE
             })
         })
     }
@@ -60,9 +79,6 @@ export function Add_Project() {
     }
 }
 
-function ArchiveProject(action) {
-    console.log("Project ID", action.payload);
-}
 function AddProject(action) {
     console.log("Add Project Clicked");
 }
@@ -76,27 +92,51 @@ function ProjectDetail(action) {
 }
 
 const ACTION_HANDLERS = {
+    [SHOW_ARCHIEVE]: (state, action) => {
+        return Object.assign({}, state, { showArchieve: !state.showArchieve });
 
-    ARCHIVE_PROJECT: (state, action) => {
-        ArchiveProject(action);
-        return Object.assign({}, state)
     },
-
-    ADD_PROJECT: (state, action) => {
+    [ARCHIVE_CONFIRMATION]: (state, action) => {
+        const projectId = action.payload ? action.payload : null;
+        return Object.assign({}, state, { archieveProjectId: projectId, deleteModal: !state.deleteModal });
+    },
+    [ARCHIVE_PROJECT]: (state, action) => {
+        let newState = Object.assign({}, state);
+        let updatedProjs = []
+        let archievProjects = []
+        newState.archievedProjects.map((proj) => {
+            archievProjects.push(proj)
+        })
+        newState.projects.map((proj) => {
+            if (proj.id != state.archieveProjectId) {
+                updatedProjs.push(proj)
+            }
+            else {
+                archievProjects.push(proj)
+            }
+        })
+        return Object.assign({}, newState, { projects: updatedProjs, archievedProjects: archievProjects, deleteModal: !state.deleteModal })
+    },
+    [ADD_PROJECT]: (state, action) => {
         AddProject(action);
         return Object.assign({}, state)
     },
-    PROJECT_DETAILS: (state, action) => {
+    [PROJECT_DETAILS]: (state, action) => {
         ProjectDetail(action);
         return Object.assign({}, state)
     },
-    LOAD_PROJECTS: (state, action) => {
-        return Object.assign({}, state, { projects: action.payload })
+    [LOAD_PROJECTS]: (state, action) => {
+        return Object.assign({}, state, { projects: action.payload, filteredProjects: action.payload })
     }
 }
 
 const initialState = {
-    projects: []
+    projects: [],
+    filteredProjects: [],
+    archieveProjectId: 0,
+    archievedProjects: [],
+    showArchieve: false,
+    deleteModal: false
 }
 
 export default function homeReducer(state = initialState, action) {
