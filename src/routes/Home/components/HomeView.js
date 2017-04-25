@@ -20,27 +20,6 @@ const AlphaFilter = (props) => {
       <a onClick={() => props.FilterProject(alph) } key={i}>{String.fromCharCode(alph) }</a>
     )) }</div>)
 }
-class NavbarInstance extends React.Component {
-  render() {
-    return (
-      <div>
-        <div>
-        </div>
-        <div onClick={this.props.AddProject}  >
-          <span className="addproject"><i className="fa fa-plus-circle iconButton" ></i> Add Project</span>
-        </div>
-        <div>
-          <Droppable types={'project'} onDrop={this.props.DragProject} >
-            <div className="Smoothie">
-              <span className="archiveproject">  <i className="fa fa-archive iconButton" ></i> Archive Project</span>
-            </div>
-          </Droppable>
-        </div>
-
-      </div>
-    );
-  }
-}
 
 class ChildTileLayoutItem extends React.Component {
   render() {
@@ -131,7 +110,7 @@ const HomeView = (props) => {
       {props.projectsData && props.projectsData.archievedProjects ?
         <div>
           <a onClick={() => props.ShowArchieveProjects() }>
-            {!props.projectsData.showArchieve? <span>Show Archieved projects</span>:<span>Hide Archieved projects</span>}
+            {!props.projectsData.showArchieve ? <span>Show Archieved projects</span> : <span>Hide Archieved projects</span>}
           </a>
         </div> : null}
       <Modal show={props.projectsData.deleteModal}>
@@ -139,22 +118,23 @@ const HomeView = (props) => {
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+        Are you sure to archieve?
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={()=>props.ArchiveProjectConfirmed()}>Archieve</Button>
-          <Button onClick={()=>props.Archieve_Project()}>Close</Button>
+          <Button onClick={() => props.ArchiveProjectConfirmed() }>Archieve</Button>
+          <Button onClick={() => props.Archieve_Project() }>Close</Button>
         </Modal.Footer>
       </Modal>
+      <ModalPopup showModal={props.showmodal}
+        action={props.Add_Project}
+        handleMultiSelectChange={props.handleMultiSelectChange}
+        handleStartDateChange={props.handleStartDateChange}
+        handleEndDateChange={props.handleEndDateChange}
+        handleSubmit={props.handleSubmit}
+        handleChange={props.handleChange}
+        project={props.project}
+        resources={props.resources}/>
     </div>
-    <ModalPopup showModal={this.props.showmodal}
-           action={this.props.Add_Project}
-           handleMultiSelectChange={this.props.handleMultiSelectChange}
-           handleStartDateChange={this.props.handleStartDateChange}
-           handleEndDateChange={this.props.handleEndDateChange}
-           handleSubmit={this.props.handleSubmit} 
-           handleChange={this.props.handleChange}
-           project={this.props.project}
-           resources={this.props.resources}/>
 
   );
 }
