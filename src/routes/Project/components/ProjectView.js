@@ -4,10 +4,12 @@ import 'react-select/dist/react-select.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import PageTitle from '../../../components/PageTitle/PageTitle';
 import './ProjectHomeStyles.scss'
-import DatePicker from 'react-datepicker';
-import moment from 'moment';
+// import DatePicker from 'react-datepicker';
+// import moment from 'moment';
 import { Link, browserHistory } from 'react-router';
 import {form, FormGroup, ControlLabel, FormControl, Modal, Checkbox} from 'react-bootstrap';
+import 'react-date-picker/index.css'
+import { DateField } from 'react-date-picker'
 
 
 
@@ -49,13 +51,15 @@ export default class ProjectView extends React.Component {
                             <div>
                                 <ControlLabel>Start Date:</ControlLabel>
                             </div>
-                            <DatePicker selected={this.props.project.startDate} onChange={this.props.handleStartDateChange.bind(this)} dateFormat={DATEFORMAT} disabled={!this.props.canEdit} />
+                            <DateField placeholder="Select Date" onChange={this.props.handleStartDateChange.bind(this)} value={this.props.project.startDate} dateFormat={DATEFORMAT} footer={false} updateOnDateClick={true} collapseOnDateClick={true} disabled={!this.props.canEdit}/>
+                            {/*<DatePicker selected={this.props.project.startDate} onChange={this.props.handleStartDateChange.bind(this)} dateFormat={DATEFORMAT} disabled={!this.props.canEdit} />*/}
                         </FormGroup>
                         <FormGroup controlId="end_date">
                             <div>
                                 <ControlLabel>Expected End Date:</ControlLabel>
                             </div>
-                            <DatePicker selected={this.props.project.endDate} onChange={this.props.handleEndDateChange.bind(this)} dateFormat={DATEFORMAT} disabled={!this.props.canEdit} />
+                            <DateField placeholder="Select Date" onChange={this.props.handleEndDateChange.bind(this)} value={this.props.project.endDate} dateFormat={DATEFORMAT} footer={false} updateOnDateClick={true} collapseOnDateClick={true} disabled={!this.props.canEdit} />
+                            {/*<DatePicker selected={this.props.project.endDate} onChange={this.props.handleEndDateChange.bind(this)} dateFormat={DATEFORMAT} disabled={!this.props.canEdit} />*/}
                         </FormGroup>
                     </div>
                     <FormGroup controlId="description">

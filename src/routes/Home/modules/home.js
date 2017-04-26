@@ -3,7 +3,6 @@ import ProjectsData from '../../../api/ProjectsData.json'
 import RESOURCES from '../../../api/EmployeeDetails.json';
 import {browserHistory} from 'react-router';
 import _ from 'lodash';
-import moment from 'moment';
 import React from 'react';
 
 export const LOAD_PROJECTS = 'LOAD_PROJECTS'
@@ -239,6 +238,7 @@ const ACTION_HANDLERS = {
         return Object.assign({}, state, { project: newSelected });
     },
     [HANDLE_SUBMIT]: (state, action) => {
+        debugger;
         console.log(state.project);
         return Object.assign({}, state, { project: project });
     }
@@ -248,8 +248,8 @@ const project = {
     name: '',
     clientname: '',
     resources: [],
-    startDate: moment(),
-    endDate: moment(),
+    startDate: null,
+    endDate: null,
     description: '',
 }
 
