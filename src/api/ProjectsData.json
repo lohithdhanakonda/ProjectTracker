@@ -6,7 +6,7 @@
         "enddate": null,
         "clientname": "test",
         "description": "test data1",
-        "status": 0,
+        "status": 1,
         "resources": [
             {
                 "id": 1,
@@ -129,7 +129,7 @@
         "enddate": null,
         "clientname": "zc",
         "description": "test data",
-        "status": 0,
+        "status": 1,
         "resources": [
             {
                 "id": 3,

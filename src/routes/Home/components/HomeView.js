@@ -22,41 +22,41 @@ const AlphaFilter = (props) => {
 };
 
 const ChildTileLayoutItem = (props) => {
-    return (
-      <Draggable className="arrangeTiles" type='project' data={props.Project.id}>
-        <TileLayoutItem>
-          <ClickableAltPanel key={props.Project.id} onClick={() => browserHistory.push('/project/' + props.Project.id) }>
-            <div>
-              <div className="project-name">
-                <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip">{props.Project.name}</Tooltip>}>
-                  <strong>{props.Project.name}</strong>
-                </OverlayTrigger>
-              </div>
-              <div className="table-div">
-                <Table responsive>
-                  <thead>
-                    <tr>
-                      <th>Start Date</th>
-                      <th>End Date</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>{props.Project.startdate}</td>
-                      <td>{props.Project.enddate == null? "Null" : props.Project.enddate }</td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </div>
+  return (
+    <Draggable className="arrangeTiles" type='project' data={props.Project.id}>
+      <TileLayoutItem>
+        <ClickableAltPanel key={props.Project.id} onClick={() => browserHistory.push('/project/' + props.Project.id) }>
+          <div>
+            <div className="project-name">
+              <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip">{props.Project.name}</Tooltip>}>
+                <strong>{props.Project.name}</strong>
+              </OverlayTrigger>
             </div>
-          </ClickableAltPanel>
-        </TileLayoutItem>
-      </Draggable >
-    );
-  };
+            <div className="table-div">
+              <Table responsive>
+                <thead>
+                  <tr>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{props.Project.startdate}</td>
+                    <td>{props.Project.enddate == null ? "Null" : props.Project.enddate }</td>
+                  </tr>
+                </tbody>
+              </Table>
+            </div>
+          </div>
+        </ClickableAltPanel>
+      </TileLayoutItem>
+    </Draggable >
+  );
+};
 
 const ProjectsView = (props) => {
-    return (
+  return (
     <div>
       <div className="row">
         <AlphaFilter  FilterProject={props.FilterProject}/>
@@ -64,13 +64,17 @@ const ProjectsView = (props) => {
           <div className="col-lg-8 col-md-8 col-sm-6 col-xs-6">
             <div className="projects-view">
               <TileLayout columns={{ md: 3, lg: 3, xs: 1, sm: 1 }}>{
-                props.Projects.map((project) => <ChildTileLayoutItem key={project.id} Project={project} ProjectDetailsView={props.ProjectDetailsView} />)
+                props.Projects.map((project) => (
+                  props.showArchieveProj ? (!project.status ? (<ChildTileLayoutItem key={project.id} Project={project} ProjectDetailsView={props.ProjectDetailsView} />)
+                    : null)
+                    : (project.status ? <ChildTileLayoutItem key={project.id} Project={project} ProjectDetailsView={props.ProjectDetailsView} /> : null)
+                ))
               }
               </TileLayout>
             </div>
           </div>
           <div className="col-lg-4 col-md-4 col-sm-6 col-xs-6 add-del-icons">
-            <div>
+            {!props.showArchieveProj ? <div>
               <div onClick={props.AddProject}  >
                 <span className="addproject"><i className="fa fa-plus-circle iconButton" ></i> Add Project</span>
               </div>
@@ -81,13 +85,13 @@ const ProjectsView = (props) => {
                   </div>
                 </Droppable>
               </div>
-            </div>
+            </div> : null }
           </div>
         </div>
       </div>
     </div>
-    );
-  };
+  );
+};
 
 
 class HomeView extends React.Component {
@@ -95,16 +99,15 @@ class HomeView extends React.Component {
     return (
       <div className="homeview">
         <ProjectsView
-          Projects={this.props.projectsData
-            && this.props.projectsData.showArchieve
-            ? this.props.projectsData.archievedProjects : this.props.projectsData.projects}
+          Projects={this.props.projectsData.projects}
           AddProject={this.props.Add_Project}
           DragProject={this.props.Archieve_Project}
           ProjectDetailsView={this.props.Project_Details}
-          FilterProject={this.props.filterProjects} />
+          FilterProject={this.props.filterProjects}
+          showArchieveProj={this.props.projectsData.showArchieve} />
         {this.props.projectsData && this.props.projectsData.archievedProjects ?
           <div>
-            <a onClick={() => this.props.ShowArchieveProjects()}>
+            <a onClick={() => this.props.ShowArchieveProjects() }>
               {!this.props.projectsData.showArchieve ? <span>Show Archieved projects</span> : <span>Hide Archieved projects</span>}
             </a>
           </div> : null}
@@ -114,10 +117,10 @@ class HomeView extends React.Component {
           </Modal.Header>
           <Modal.Body>
             Are you sure to archieve?
-        </Modal.Body>
+          </Modal.Body>
           <Modal.Footer>
-            <Button onClick={() => this.props.ArchiveProjectConfirmed()}>Archieve</Button>
-            <Button onClick={() => this.props.Archieve_Project()}>Close</Button>
+            <Button onClick={() => this.props.ArchiveProjectConfirmed() }>Archieve</Button>
+            <Button onClick={() => this.props.Archieve_Project() }>Close</Button>
           </Modal.Footer>
         </Modal>
         <ModalPopup showModal={this.props.showmodal}

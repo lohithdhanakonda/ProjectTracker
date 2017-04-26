@@ -6,53 +6,54 @@ import { Link, browserHistory } from 'react-router'
 import Select from 'react-select';
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
+import '../styles/bootstrap-multiselect.css'
 import {form, FormGroup, ControlLabel, FormControl, Modal} from 'react-bootstrap'
 
 const DATEFORMAT = 'YYYY/MM/DD'
 
 
 class AddProjectView extends React.Component {
-  render() {
-    return (
-        <div>
-            <form onSubmit={this.props.handleSubmit.bind(this) }>
-                <FormGroup controlId="name">
-                    <ControlLabel>Name</ControlLabel>
-                    <FormControl type="text" placeholder="Project Name" name="name" onChange={this.props.handleChange.bind(this) }/>
-                </FormGroup>
-                <FormGroup controlId="client_name">
-                    <ControlLabel>Client Name</ControlLabel>
-                    <FormControl type="text" placeholder="Client Name" name="clientname" onChange={this.props.handleChange.bind(this) }/>
-                </FormGroup>
-                <FormGroup controlId="employees">
-                    <ControlLabel>Employees</ControlLabel>
-                    <FormControl componentClass="select" multiple onChange={this.props.handleMultiSelectChange.bind(this) } value={this.props.project.resources}>
-                        {
-                            this.props.resources.map((resource) => <option key={resource.id} value={resource.id} id={resource.id}>{resource.name}</option>)
-                        }
-                    </FormControl>
-                </FormGroup>
-                <div>
-                    <FormGroup controlId="start_date">
-                        <ControlLabel>Start Date: </ControlLabel>
-                        <DatePicker selected={this.props.project.startDate} onChange={this.props.handleStartDateChange.bind(this) } dateFormat={DATEFORMAT} />
+    render() {
+        return (
+            <div>
+                <form onSubmit={this.props.handleSubmit.bind(this) }>
+                    <FormGroup controlId="name">
+                        <ControlLabel>Name</ControlLabel>
+                        <FormControl type="text" placeholder="Project Name" name="name" onChange={this.props.handleChange.bind(this) }/>
                     </FormGroup>
-                    <FormGroup controlId="end_date">
-                        <ControlLabel>Expected End Date: </ControlLabel>
-                        <DatePicker selected={this.props.project.endDate} onChange={this.props.handleEndDateChange.bind(this) } dateFormat={DATEFORMAT} />
+                    <FormGroup controlId="client_name">
+                        <ControlLabel>Client Name</ControlLabel>
+                        <FormControl type="text" placeholder="Client Name" name="clientname" onChange={this.props.handleChange.bind(this) }/>
                     </FormGroup>
-                </div>
-                <FormGroup controlId="description">
-                    <ControlLabel>Description</ControlLabel>
-                    <FormControl componentClass="textarea" name="description" placeholder="Project Description" onChange={this.props.handleChange.bind(this) }/>
-                </FormGroup>
-                <div>
-                    <span className='splitButton'><button type="submit" className='btn btn-primary btn-large'>Submit</button></span>
-                </div>
-            </form>
-        </div>
-    )
-}
+                    <FormGroup controlId="employees">
+                        <ControlLabel>Employees</ControlLabel>
+                        <FormControl componentClass="select" multiple onChange={this.props.handleMultiSelectChange.bind(this) } value={this.props.project.resources}>
+                            {
+                                this.props.resources.map((resource) => <option key={resource.id} value={resource.id} id={resource.id}>{resource.name}</option>)
+                            }
+                        </FormControl>
+                    </FormGroup>
+                    <div>
+                        <FormGroup controlId="start_date">
+                            <ControlLabel>Start Date: </ControlLabel>
+                            <DatePicker selected={this.props.project.startDate} onChange={this.props.handleStartDateChange.bind(this) } dateFormat={DATEFORMAT} />
+                        </FormGroup>
+                        <FormGroup controlId="end_date">
+                            <ControlLabel>Expected End Date: </ControlLabel>
+                            <DatePicker selected={this.props.project.endDate} onChange={this.props.handleEndDateChange.bind(this) } dateFormat={DATEFORMAT} />
+                        </FormGroup>
+                    </div>
+                    <FormGroup controlId="description">
+                        <ControlLabel>Description</ControlLabel>
+                        <FormControl componentClass="textarea" name="description" placeholder="Project Description" onChange={this.props.handleChange.bind(this) }/>
+                    </FormGroup>
+                    <div>
+                        <span className='splitButton'><button type="submit" className='btn btn-primary btn-large'>Submit</button></span>
+                    </div>
+                </form>
+            </div>
+        )
+    }
 }
 
 const ModalPopup = (props) => {

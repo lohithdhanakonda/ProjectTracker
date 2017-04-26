@@ -175,22 +175,9 @@ export function handleSubmit(e) {
         type: HANDLE_SUBMIT
     }
 }
-
-
-// function ArchiveProject(action) {
-//     console.log("Project ID", action.payload);
-// }
-
-// function ProjectDetail(action) {
-//     console.log("Project ID", action.payload);
-//     browserHistory.push(`/project/${action.payload}`);
-// }
-
 const ACTION_HANDLERS = {
     [SHOW_ARCHIEVE]: (state, action) => {
         return Object.assign({}, state, { showArchieve: !state.showArchieve });
-
-
     },
     [ARCHIVE_CONFIRMATION]: (state, action) => {
         const projectId = action.payload ? action.payload : null;
@@ -198,17 +185,14 @@ const ACTION_HANDLERS = {
     },
     [ARCHIVE_PROJECT]: (state, action) => {
         let newState = Object.assign({}, state);
-        // let updatedProjs = []
-        // let archievProjects = []
-        // newState.archievedProjects.map((proj) => {
-        //     archievProjects.push(proj)
-        // })
+        let updatedProjs = []
         newState.projects.map((proj) => {
             if (proj.id == state.archieveProjectId) {
-                proj.status=1
+                proj.status = 0
             }
+            updatedProjs.push(proj);
         })
-        return Object.assign({}, state ,{projects: newState.projects})
+        return Object.assign({}, newState, { projects: updatedProjs, deleteModal: !state.deleteModal })
     },
     [ADD_PROJECT]: (state, action) => {
         return Object.assign({}, state, { showModal: !state.showModal })
