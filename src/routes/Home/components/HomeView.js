@@ -23,7 +23,7 @@ const AlphaFilter = (props) => {
 
 const ChildTileLayoutItem = (props) => {
     return (
-      <Draggable className="arrangeTiles" type='project' data={props.Project.id}>
+      <Draggable className="arrangeTiles" type='project' data={props.Project.id} enabled={!props.showArchieve? true : false}>
         <TileLayoutItem>
           <ClickableAltPanel key={props.Project.id} onClick={() => browserHistory.push('/project/' + props.Project.id) }>
             <div>
@@ -64,7 +64,7 @@ const ProjectsView = (props) => {
           <div className="col-lg-8 col-md-8 col-sm-6 col-xs-6">
             <div className="projects-view">
               <TileLayout columns={{ md: 3, lg: 3, xs: 1, sm: 1 }}>{
-                props.Projects.map((project) => <ChildTileLayoutItem key={project.id} Project={project} ProjectDetailsView={props.ProjectDetailsView} />)
+                props.Projects.map((project) => <ChildTileLayoutItem key={project.id} Project={project} ProjectDetailsView={props.ProjectDetailsView} showArchieve={props.showArchieve} />)
               }
               </TileLayout>
             </div>
@@ -75,7 +75,7 @@ const ProjectsView = (props) => {
                 <span className="addproject"><i className="fa fa-plus-circle iconButton" ></i> Add Project</span>
               </div>
               <div>
-                <Droppable types={'project'} onDrop={props.DragProject} >
+                <Droppable types={'project'} onDrop={props.DragProject} enabled={!props.showArchieve? true : false}>
                   <div className="Smoothie">
                     <span className="archiveproject">  <i className="fa fa-archive iconButton" ></i> Archive Project</span>
                   </div>
@@ -101,7 +101,8 @@ class HomeView extends React.Component {
           AddProject={this.props.Add_Project}
           DragProject={this.props.Archieve_Project}
           ProjectDetailsView={this.props.Project_Details}
-          FilterProject={this.props.filterProjects} />
+          FilterProject={this.props.filterProjects}
+          showArchieve={this.props.projectsData.showArchieve} />
         {this.props.projectsData && this.props.projectsData.archievedProjects ?
           <div>
             <a onClick={() => this.props.ShowArchieveProjects()}>
