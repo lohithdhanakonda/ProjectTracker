@@ -4,8 +4,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import PageTitle from '../../../components/PageTitle/PageTitle';
 import { Link, browserHistory } from 'react-router'
 import Select from 'react-select';
-// import DatePicker from 'react-datepicker'
-//import moment from 'moment'
 import {form, FormGroup, ControlLabel, FormControl, Modal} from 'react-bootstrap'
 import 'react-date-picker/index.css'
 import { DateField } from 'react-date-picker'

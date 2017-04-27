@@ -23,7 +23,7 @@ const AlphaFilter = (props) => {
 
 const ChildTileLayoutItem = (props) => {
     return (
-      <Draggable className="arrangeTiles" type='project' data={props.Project.id} enabled={!props.showArchieve? true : false}>
+      <Draggable className="arrangeTiles" type='project' data={props.Project.id} enabled={!props.showArchieveProj ? true : false}>
         <TileLayoutItem>
           <ClickableAltPanel key={props.Project.id} onClick={() => browserHistory.push('/project/' + props.Project.id) }>
             <div>
@@ -56,7 +56,7 @@ const ChildTileLayoutItem = (props) => {
   };
 
 const ProjectsView = (props) => {
-    return (
+  return (
     <div>
       <div className="row">
         <AlphaFilter  FilterProject={props.FilterProject}/>
@@ -64,30 +64,30 @@ const ProjectsView = (props) => {
           <div className="col-lg-8 col-md-8 col-sm-6 col-xs-6">
             <div className="projects-view">
               <TileLayout columns={{ md: 3, lg: 3, xs: 1, sm: 1 }}>{
-                props.Projects.map((project) => <ChildTileLayoutItem key={project.id} Project={project} ProjectDetailsView={props.ProjectDetailsView} showArchieve={props.showArchieve} />)
+                props.Projects.map((project) => <ChildTileLayoutItem key={project.id} Project={project} ProjectDetailsView={props.ProjectDetailsView} showArchieveProj={props.showArchieveProj} />)
               }
               </TileLayout>
             </div>
           </div>
           <div className="col-lg-4 col-md-4 col-sm-6 col-xs-6 add-del-icons">
-            <div>
+            {!props.showArchieveProj ? <div>
               <div onClick={props.AddProject}  >
                 <span className="addproject"><i className="fa fa-plus-circle iconButton" ></i> Add Project</span>
               </div>
               <div>
-                <Droppable types={'project'} onDrop={props.DragProject} enabled={!props.showArchieve? true : false}>
+                <Droppable types={'project'} onDrop={props.DragProject} enabled={!props.showArchieveProj? true : false}>
                   <div className="Smoothie">
                     <span className="archiveproject">  <i className="fa fa-archive iconButton" ></i> Archive Project</span>
                   </div>
                 </Droppable>
               </div>
-            </div>
+            </div> : null }
           </div>
         </div>
       </div>
     </div>
-    );
-  };
+  );
+};
 
 
 class HomeView extends React.Component {
@@ -102,10 +102,10 @@ class HomeView extends React.Component {
           DragProject={this.props.Archieve_Project}
           ProjectDetailsView={this.props.Project_Details}
           FilterProject={this.props.filterProjects}
-          showArchieve={this.props.projectsData.showArchieve} />
+          showArchieveProj={this.props.projectsData.showArchieve} />
         {this.props.projectsData && this.props.projectsData.archievedProjects ?
           <div>
-            <a onClick={() => this.props.ShowArchieveProjects()}>
+            <a onClick={() => this.props.ShowArchieveProjects() }>
               {!this.props.projectsData.showArchieve ? <span>Show Archieved projects</span> : <span>Hide Archieved projects</span>}
             </a>
           </div> : null}
@@ -115,10 +115,10 @@ class HomeView extends React.Component {
           </Modal.Header>
           <Modal.Body>
             Are you sure to archieve?
-        </Modal.Body>
+          </Modal.Body>
           <Modal.Footer>
-            <Button onClick={() => this.props.ArchiveProjectConfirmed()}>Archieve</Button>
-            <Button onClick={() => this.props.Archieve_Project()}>Close</Button>
+            <Button onClick={() => this.props.ArchiveProjectConfirmed() }>Archieve</Button>
+            <Button onClick={() => this.props.Archieve_Project() }>Close</Button>
           </Modal.Footer>
         </Modal>
         <ModalPopup showModal={this.props.showmodal}

@@ -249,7 +249,6 @@ const ACTION_HANDLERS = {
         return Object.assign({}, state, { project: newSelected });
     },
     [HANDLE_SUBMIT]: (state, action) => {
-        debugger;
         console.log(state.project);
         return Object.assign({}, state, { project: project });
     }
