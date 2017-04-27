@@ -18,6 +18,28 @@ export const ARCHIVE_CONFIRMATION = 'ARCHIVE_CONFIRMATION'
 export const SHOW_ARCHIEVE = 'SHOW_ARCHIEVE'
 
 
+const project = {
+    name: '',
+    clientname: '',
+    resources: [],
+    startDate: null,
+    endDate: null,
+    description: '',
+}
+
+
+const initialState = {
+    projects: [],
+    resources: RESOURCES,
+    filteredProjects: [],
+    project: project,
+    showModal: false,
+    deleteModal: false,
+    archieveProjectId: 0,
+    archievedProjects: [],
+    showArchieve: false
+}
+
 export function LoadProjects() {
     return {
         type: LOAD_PROJECTS,
@@ -96,22 +118,12 @@ export function Project_Details(id) {
 }
 
 //ADD & EDIT POPUP  RELATED FUNCTION
-export function handleMultiSelectChange(e) {
-    var options = e.target.options;
-    var selectedvalues = [];
-    for (var i = 0, l = options.length; i < l; i++) {
-        if (options[i].selected) {
-            selectedvalues.push(options[i].id);
-        }
-    }
+export function handleMultiSelectChange(objs) {
     return (dispatch, getState) => {
         return new Promise((resolve) => {
             dispatch({
                 type: HANDLE_MULTI_SELECT,
-                payload: {
-                    key: 'resources',
-                    value: selectedvalues
-                }
+                payload: objs
             })
         })
     }
@@ -197,12 +209,10 @@ const ACTION_HANDLERS = {
         return Object.assign({}, newState, { projects: updatedProjs, archievedProjects: archievProjects, deleteModal: !state.deleteModal })
     },
     [ADD_PROJECT]: (state, action) => {
-        return Object.assign({}, state, { showModal: !state.showModal })
-
+        return Object.assign({}, state, { showModal: !state.showModal,project: project})
     },
     [PROJECT_DETAILS]: (state, action) => {
         return browserHistory.push(`/project/${action.payload}`);
-        // return Object.assign({}, state)
     },
     [LOAD_PROJECTS]: (state, action) => {
         let updatedProjs = []
@@ -218,9 +228,10 @@ const ACTION_HANDLERS = {
         return Object.assign({}, state, { projects: updatedProjs, archievedProjects: archievProjects, filteredProjects: updatedProjs})
     },
     [HANDLE_MULTI_SELECT]: (state, action) => {
-        let newSelected = _.extend({}, state.project);
-        newSelected[action.payload.key] = action.payload.value;
-        return Object.assign({}, state, { project: newSelected });
+        let newState = Object.assign({}, state);
+        let projectstate = _.extend({}, state.project);
+        let project= Object.assign({}, projectstate, { resources: action.payload })
+        return Object.assign({}, newState, { project});
     },
     [HANDLE_CHANGE_EVENT]: (state, action) => {
         let newSelected = _.extend({}, state.project);
@@ -243,27 +254,6 @@ const ACTION_HANDLERS = {
         return Object.assign({}, state, { project: project });
     }
 
-}
-const project = {
-    name: '',
-    clientname: '',
-    resources: [],
-    startDate: null,
-    endDate: null,
-    description: '',
-}
-
-
-const initialState = {
-    projects: [],
-    resources: RESOURCES,
-    filteredProjects: [],
-    project: project,
-    showModal: false,
-    deleteModal: false,
-    archieveProjectId: 0,
-    archievedProjects: [],
-    showArchieve: false
 }
 
 export default function homeReducer(state = initialState, action) {

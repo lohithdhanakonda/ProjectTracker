@@ -28,22 +28,16 @@ class AddProjectView extends React.Component {
                 </FormGroup>
                 <FormGroup controlId="employees">
                     <ControlLabel>Employees</ControlLabel>
-                    <FormControl componentClass="select" multiple onChange={this.props.handleMultiSelectChange.bind(this)} value={this.props.project.resources}>
-                        {
-                            this.props.resources.map((resource) => <option key={resource.id} value={resource.id} id={resource.id}>{resource.name}</option>)
-                        }
-                    </FormControl>
+                    <Select multi  value={this.props.project.resources} placeholder="Select Resources" options={this.props.resources} onChange={this.props.handleMultiSelectChange.bind(this)} labelKey='name' valueKey='id'/>
                 </FormGroup>
                 <div>
                     <FormGroup controlId="start_date">
                         <ControlLabel>Start Date: </ControlLabel>
                         <DateField placeholder="Select Date" onChange={this.props.handleStartDateChange.bind(this)} value={this.props.project.startDate} dateFormat={DATEFORMAT} footer={false} updateOnDateClick={true} collapseOnDateClick={true} />
-                        {/*<DatePicker selected={this.props.project.startDate} onChange={this.props.handleStartDateChange.bind(this) } dateFormat={DATEFORMAT} />*/}
                     </FormGroup>
                     <FormGroup controlId="end_date">
                         <ControlLabel>Expected End Date: </ControlLabel>
                         <DateField placeholder="Select Date" onChange={this.props.handleEndDateChange.bind(this)} value={this.props.project.endDate} dateFormat={DATEFORMAT} footer={false} updateOnDateClick={true} collapseOnDateClick={true} />
-                        {/*<DatePicker selected={this.props.project.endDate} onChange={this.props.handleEndDateChange.bind(this) } dateFormat={DATEFORMAT} />*/}
                     </FormGroup>
                 </div>
                 <FormGroup controlId="description">
