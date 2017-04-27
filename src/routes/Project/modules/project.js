@@ -14,12 +14,12 @@ export const HANDLE_EDIT = 'HANDLE_EDIT'
 
 const project = {
     name: '',
-    clientname:'',
+    clientname: '',
     resources: [],
-    startDate: moment(),
-    endDate: moment(),
+    startDate: null,
+    endDate: null,
     description: '',
-    status:0
+    status: 1
 }
 
 const initialState = {
@@ -32,7 +32,9 @@ export function loadProjectDetails(id) {
     debugger;
     let projectData = ProjectsData.filter(project => {
         if (project.id == id)
-            return project;
+        // debugger
+        //     project.startdate = new Date(project.startdate)
+        return project;
     });
     return (dispatch, getState) => {
         return new Promise((resolve) => {
@@ -50,8 +52,8 @@ export function handleMultiSelectChange(objs) {
         return new Promise((resolve) => {
             dispatch({
                 type: HANDLE_MULTI_SELECT,
-                payload:{
-                    key:'resources',
+                payload: {
+                    key: 'resources',
                     value: objs
                 }
             })
@@ -60,6 +62,8 @@ export function handleMultiSelectChange(objs) {
 }
 export function handleChange(e) {
     return (dispatch, getState) => {
+        console.log(e, 'event')
+        debugger
         return new Promise((resolve) => {
             dispatch({
                 type: HANDLE_CHANGE_EVENT,
@@ -71,29 +75,29 @@ export function handleChange(e) {
         })
     }
 }
-export function handleStartDateChange(startDate) {
+export function handleStartDateChange(startdate) {
     let value = startDate;
     return (dispatch, getState) => {
         return new Promise((resolve) => {
             dispatch({
                 type: HANDLE_STARTDATE_CHANGE,
                 payload: {
-                    key: 'startDate',
-                    value: startDate
+                    key: 'startdate',
+                    value: startdate
                 }
             })
         })
     }
 
 }
-export function handleEndDateChange(endDate) {
+export function handleEndDateChange(enddate) {
     return (dispatch, getState) => {
         return new Promise((resolve) => {
             dispatch({
                 type: HANDLE_ENDDATE_CHANGE,
                 payload: {
-                    key: 'endDate',
-                    value: endDate
+                    key: 'enddate',
+                    value: enddate
                 }
             })
         })

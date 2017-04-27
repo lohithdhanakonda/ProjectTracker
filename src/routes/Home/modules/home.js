@@ -22,9 +22,10 @@ const project = {
     name: '',
     clientname: '',
     resources: [],
-    startDate: null,
-    endDate: null,
+    startdate: null,
+    enddate: null,
     description: '',
+    status: 1
 }
 
 
@@ -119,6 +120,7 @@ export function Project_Details(id) {
 
 //ADD & EDIT POPUP  RELATED FUNCTION
 export function handleMultiSelectChange(objs) {
+    debugger;
     return (dispatch, getState) => {
         return new Promise((resolve) => {
             dispatch({
@@ -129,6 +131,7 @@ export function handleMultiSelectChange(objs) {
     }
 }
 export function handleChange(e) {
+    debugger;
     return (dispatch, getState) => {
         return new Promise((resolve) => {
             dispatch({
@@ -141,36 +144,29 @@ export function handleChange(e) {
         })
     }
 }
-export function handleStartDateChange(startDate) {
-    let value = startDate;
+export function handleStartDateChange(startdate) {
+    debugger;
     return (dispatch, getState) => {
         return new Promise((resolve) => {
             dispatch({
                 type: HANDLE_STARTDATE_CHANGE,
                 payload: {
-                    key: 'startDate',
-                    value: startDate
+                    key: 'startdate',
+                    value: startdate
                 }
             })
         })
     }
 }
-
-function ProjectDetail(action) {
-    console.log("Project ID", action.payload);
-    return (dispatch, getState) => {
-        console.log(dispatch)
-        console.log(getState)
-    }
-}
-export function handleEndDateChange(endDate) {
+export function handleEndDateChange(enddate) {
+    debugger;
     return (dispatch, getState) => {
         return new Promise((resolve) => {
             dispatch({
                 type: HANDLE_ENDDATE_CHANGE,
                 payload: {
-                    key: 'endDate',
-                    value: endDate
+                    key: 'enddate',
+                    value: enddate
                 }
             })
         })
@@ -178,6 +174,7 @@ export function handleEndDateChange(endDate) {
 
 }
 export function handleSubmit(e) {
+    debugger;
     return {
         type: HANDLE_SUBMIT
     }
