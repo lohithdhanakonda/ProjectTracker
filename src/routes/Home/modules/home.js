@@ -249,7 +249,6 @@ const initialState = {
     showModal: false,
     deleteModal: false,
     archieveProjectId: 0,
-    archievedProjects: [],
     showArchieve: false
 }
 

@@ -96,6 +96,12 @@ const ProjectsView = (props) => {
 
 class HomeView extends React.Component {
   render() {
+    let showArcLink = false;
+    this.props.projectsData.projects.map((p) => {
+      if (!p.status) {
+        showArcLink = true;
+      }
+    })
     return (
       <div className="homeview">
         <ProjectsView
@@ -105,7 +111,7 @@ class HomeView extends React.Component {
           ProjectDetailsView={this.props.Project_Details}
           FilterProject={this.props.filterProjects}
           showArchieveProj={this.props.projectsData.showArchieve} />
-        {this.props.projectsData && this.props.projectsData.archievedProjects ?
+        {this.props.projectsData && showArcLink ?
           <div>
             <a onClick={() => this.props.ShowArchieveProjects() }>
               {!this.props.projectsData.showArchieve ? <span>Show Archieved projects</span> : <span>Hide Archieved projects</span>}
