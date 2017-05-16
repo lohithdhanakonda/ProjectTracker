@@ -23,7 +23,7 @@ const AlphaFilter = (props) => {
 
 const ChildTileLayoutItem = (props) => {
   return (
-    <Draggable className="arrangeTiles" type='project' data={props.Project.id}>
+      <Draggable className="arrangeTiles" type='project' data={props.Project.id} enabled={!props.showArchieve? true : false}>
       <TileLayoutItem>
         <ClickableAltPanel key={props.Project.id} onClick={() => browserHistory.push('/project/' + props.Project.id) }>
           <div>
@@ -79,7 +79,7 @@ const ProjectsView = (props) => {
                 <span className="addproject"><i className="fa fa-plus-circle iconButton" ></i> Add Project</span>
               </div>
               <div>
-                <Droppable types={'project'} onDrop={props.DragProject} >
+                <Droppable types={'project'} onDrop={props.DragProject} enabled={!props.showArchieve? true : false}>
                   <div className="Smoothie">
                     <span className="archiveproject">  <i className="fa fa-archive iconButton" ></i> Archive Project</span>
                   </div>

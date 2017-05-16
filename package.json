@@ -107,6 +107,7 @@
     "react-bootstrap": "^0.30.8",
     "react-bootstrap-multiselect": "^2.4.1",
     "react-datepicker": "^0.46.0",
+    "react-date-picker": "^5.3.28",
     "react-dom": "^15.0.0",
     "react-drag-and-drop": "^2.4.0",
     "react-nav-bar": "^0.6.4",

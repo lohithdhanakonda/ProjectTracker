@@ -39,26 +39,20 @@ export function loadProjectDetails(id) {
             dispatch({
                 type: LOAD_PROJECT,
                 payload: projectData[0],
-                empdata: RESOURCES
+                resourcedata: RESOURCES
             })
         })
     }
 }
-export function handleMultiSelectChange(e) {
-    var options = e.target.options;
-    var selectedvalues = [];
-    for (var i = 0, l = options.length; i < l; i++) {
-        if (options[i].selected) {
-            selectedvalues.push(options[i].value);
-        }
-    }
+export function handleMultiSelectChange(objs) {
+
     return (dispatch, getState) => {
         return new Promise((resolve) => {
             dispatch({
                 type: HANDLE_MULTI_SELECT,
-                payload: {
-                    key: 'employees',
-                    value: selectedvalues
+                payload:{
+                    key:'resources',
+                    value: objs
                 }
             })
         })
@@ -125,10 +119,7 @@ export function handleEdit() {
 const ACTION_HANDLERS = {
 
     [LOAD_PROJECT]: (state, action) => {
-        // let newState = Object.assign({}, state);
-        console.log("action", action);
-        // initialState.project=action.payload;
-        return Object.assign({}, state, { project: action.payload, resources: action.empdata })
+        return Object.assign({}, state, { project: action.payload, resources: action.resourcedata, canEdit: false })
     },
     HANDLE_MULTI_SELECT: (state, action) => {
         let newSelected = _.extend({}, state.project);
