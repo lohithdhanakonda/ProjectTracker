@@ -23,7 +23,7 @@ const AlphaFilter = (props) => {
 
 const ChildTileLayoutItem = (props) => {
   return (
-      <Draggable className="arrangeTiles" type='project' data={props.Project.id} enabled={!props.showArchieve? true : false}>
+    <Draggable className="arrangeTiles" type='project' data={props.Project.id} enabled={!props.showArchieve ? true : false}>
       <TileLayoutItem>
         <ClickableAltPanel key={props.Project.id} onClick={() => browserHistory.push('/project/' + props.Project.id) }>
           <div>
@@ -63,14 +63,15 @@ const ProjectsView = (props) => {
         <div>
           <div className="col-lg-8 col-md-8 col-sm-6 col-xs-6">
             <div className="projects-view">
-              <TileLayout columns={{ md: 3, lg: 3, xs: 1, sm: 1 }}>{
+              {props.Projects && props.Projects.length > 0 ? <TileLayout columns={{ md: 3, lg: 3, xs: 1, sm: 1 }}>{
                 props.Projects.map((project) => (
                   props.showArchieveProj ? (!project.status ? (<ChildTileLayoutItem key={project.id} Project={project} ProjectDetailsView={props.ProjectDetailsView} />)
                     : null)
-                    : (project.status ? <ChildTileLayoutItem key={project.id} Project={project} ProjectDetailsView={props.ProjectDetailsView} /> : null)
+                    : (project.status ? <ChildTileLayoutItem key={project.id} Project={project} ProjectDetailsView={props.ProjectDetailsView} />
+                      : null)
                 ))
               }
-              </TileLayout>
+              </TileLayout> : <div><h3>Sorry, no projects found for your search criteria</h3></div>}
             </div>
           </div>
           <div className="col-lg-4 col-md-4 col-sm-6 col-xs-6 add-del-icons">
@@ -79,7 +80,7 @@ const ProjectsView = (props) => {
                 <span className="addproject"><i className="fa fa-plus-circle iconButton" ></i> Add Project</span>
               </div>
               <div>
-                <Droppable types={'project'} onDrop={props.DragProject} enabled={!props.showArchieve? true : false}>
+                <Droppable types={'project'} onDrop={props.DragProject} enabled={!props.showArchieve ? true : false}>
                   <div className="Smoothie">
                     <span className="archiveproject">  <i className="fa fa-archive iconButton" ></i> Archive Project</span>
                   </div>

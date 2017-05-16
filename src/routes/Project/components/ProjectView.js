@@ -8,12 +8,11 @@ import { Link, browserHistory } from 'react-router';
 import {form, FormGroup, ControlLabel, FormControl, Modal, Checkbox} from 'react-bootstrap';
 import 'react-date-picker/index.css';
 import { DateField } from 'react-date-picker';
+import DateTimePicker from 'react-widgets/lib/DateTimePicker';
+import  '../../../styles/widgetStyles.scss';
 import Select from 'react-select';
 
-
-
 const DATEFORMAT = 'YYYY/MM/DD'
-
 
 export default class ProjectView extends React.Component {
     componentDidMount() {
@@ -28,36 +27,36 @@ export default class ProjectView extends React.Component {
                 <form key={this.props.project.id}>
                     <FormGroup controlId="name">
                         <ControlLabel>Name</ControlLabel>
-                        <FormControl type="text" placeholder="Project Name" name="name" onChange={this.props.handleChange.bind(this)} defaultValue={this.props.project.name} disabled="true" />
+                        <FormControl type="text" placeholder="Project Name" name="name" onChange={this.props.handleChange} defaultValue={this.props.project.name} disabled="true" />
                     </FormGroup>
                     <FormGroup controlId="client_name">
                         <ControlLabel>Client Name</ControlLabel>
-                        <FormControl type="text" placeholder="Client Name" name="clientname" onChange={this.props.handleChange.bind(this)} defaultValue={this.props.project.clientname} disabled="true" />
+                        <FormControl type="text" placeholder="Client Name" name="clientname" onChange={this.props.handleChange} defaultValue={this.props.project.clientname} disabled="true" />
                     </FormGroup>
                     <FormGroup controlId="status">
-                        <Checkbox inline name="status" onChange={this.props.handleChange.bind(this)} defaultChecked={this.props.project.status==0? false : true} disabled={!this.props.canEdit}>Project Archive</Checkbox>
+                        <Checkbox inline name="status" onChange={this.props.handleChange} defaultChecked={this.props.project.status==0? false : true} disabled={!this.props.canEdit}>Project Archive</Checkbox>
                     </FormGroup>
                     <FormGroup controlId="employees">
                         <ControlLabel>Employees</ControlLabel>
-                          <Select multi  value={this.props.project.resources} placeholder="Select Resources" options={this.props.resources} onChange={this.props.handleMultiSelectChange.bind(this)} labelKey='name' valueKey='id' disabled={!this.props.canEdit}/>
+                          <Select multi  value={this.props.project.resources} placeholder="Select Resources" options={this.props.resources} onChange={this.props.handleMultiSelectChange} labelKey='name' valueKey='id' disabled={!this.props.canEdit}/>
                     </FormGroup>
                     <div >
                         <FormGroup controlId="start_date">
                             <div>
                                 <ControlLabel>Start Date:</ControlLabel>
                             </div>
-                            <DateField placeholder="Select Date" onChange={this.props.handleStartDateChange.bind(this)} value={this.props.project.startDate} dateFormat={DATEFORMAT} footer={false} updateOnDateClick={true} collapseOnDateClick={true} disabled={!this.props.canEdit}/>
+                            <DateTimePicker time={false} onChange={this.props.handleStartDateChange} value={this.props.project.startDate} disabled={!this.props.canEdit}/>
                         </FormGroup>
                         <FormGroup controlId="end_date">
                             <div>
                                 <ControlLabel>Expected End Date:</ControlLabel>
                             </div>
-                            <DateField placeholder="Select Date" onChange={this.props.handleEndDateChange.bind(this)} value={this.props.project.endDate} dateFormat={DATEFORMAT} footer={false} updateOnDateClick={true} collapseOnDateClick={true} disabled={!this.props.canEdit} />
+                            <DateTimePicker time={false} onChange={this.props.handleEndDateChange} value={this.props.project.endDate} disabled={!this.props.canEdit}/>
                         </FormGroup>
                     </div>
                     <FormGroup controlId="description">
                         <ControlLabel>Description</ControlLabel>
-                        <FormControl componentClass="textarea" name="description" placeholder="Project Description" onChange={this.props.handleChange.bind(this)} defaultValue={this.props.project.description} disabled={!this.props.canEdit} />
+                        <FormControl componentClass="textarea" name="description" placeholder="Project Description" onChange={this.props.handleChange} defaultValue={this.props.project.description} disabled={!this.props.canEdit} />
                     </FormGroup>
                     <div >{
                         this.props.canEdit ? <span className='splitButton'><button type="button" className='btn btn-primary btn-large'>Save</button></span> : <span className='splitButton'><button type="button" className='btn btn-primary btn-large' onClick={this.props.handleEdit}>Edit</button></span>

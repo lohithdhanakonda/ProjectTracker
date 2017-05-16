@@ -57,7 +57,7 @@ export function ArchiveProjectConfirmed() {
     }
 }
 export function Archieve_Project(event) {
-        return (dispatch, getState) => {
+    return (dispatch, getState) => {
         return new Promise((resolve) => {
             dispatch({
                 type: ARCHIVE_CONFIRMATION,
@@ -197,24 +197,23 @@ const ACTION_HANDLERS = {
         return Object.assign({}, state, { archieveProjectId: projectId, deleteModal: !state.deleteModal });
     },
     [ARCHIVE_PROJECT]: (state, action) => {
-       let newState = Object.assign({}, state);
+        let newState = Object.assign({}, state);
         let updatedProjs = []
         // let archievProjects = []
         // newState.archievedProjects.map((proj) => {
         //     archievProjects.push(proj)
         // })
         newState.projects.map((proj) => {
-             if (proj.id == state.archieveProjectId) {
+            if (proj.id == state.archieveProjectId) {
                 proj.status = 0
-               
             }
             updatedProjs.push(proj);
         })
         return Object.assign({}, newState, { projects: updatedProjs, deleteModal: !state.deleteModal })
     },
     [ADD_PROJECT]: (state, action) => {
-        return Object.assign({}, state, { showModal: !state.showModal,project: project})
-       // return Object.assign({}, state, { showModal: !state.showModal })
+        return Object.assign({}, state, { showModal: !state.showModal, project: project })
+        // return Object.assign({}, state, { showModal: !state.showModal })
 
     },
     [PROJECT_DETAILS]: (state, action) => {
@@ -224,21 +223,17 @@ const ACTION_HANDLERS = {
     [LOAD_PROJECTS]: (state, action) => {
         let updatedProjs = []
         let archievProjects = []
-        let projects =action.payload
+        let projects = action.payload
         projects.map((proj) => {
-             if (proj.status==1) {
-                archievProjects.push(proj)
-            } else{
-                updatedProjs.push(proj)
-            }
+            updatedProjs.push(proj)
         })
-        return Object.assign({}, state, { projects: updatedProjs, archievedProjects: archievProjects, filteredProjects: updatedProjs})
+        return Object.assign({}, state, { projects: updatedProjs, filteredProjects: updatedProjs })
     },
     [HANDLE_MULTI_SELECT]: (state, action) => {
         let newState = Object.assign({}, state);
         let projectstate = _.extend({}, state.project);
-        let project= Object.assign({}, projectstate, { resources: action.payload })
-        return Object.assign({}, newState, { project});
+        let project = Object.assign({}, projectstate, { resources: action.payload })
+        return Object.assign({}, newState, { project });
     },
     [HANDLE_CHANGE_EVENT]: (state, action) => {
         let newSelected = _.extend({}, state.project);
