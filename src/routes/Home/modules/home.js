@@ -1,12 +1,44 @@
+import ProjectDetails from '../../../api/ProjectDetails.json'
 import ProjectsData from '../../../api/ProjectsData.json'
-import { browserHistory } from 'react-router';
-import _ from  'lodash'
-import { push } from 'react-router-redux';
+import RESOURCES from '../../../api/EmployeeDetails.json';
+import {browserHistory} from 'react-router';
+import _ from 'lodash';
+import React from 'react';
 
 export const LOAD_PROJECTS = 'LOAD_PROJECTS'
 export const ARCHIVE_PROJECT = 'ARCHIVE_PROJECT'
 export const ADD_PROJECT = 'ADD_PROJECT'
 export const PROJECT_DETAILS = 'PROJECT_DETAILS'
+export const HANDLE_MULTI_SELECT = 'HANDLE_MULTI_SELECT'
+export const HANDLE_CHANGE_EVENT = 'HANDLE_CHANGE_EVENT'
+export const HANDLE_STARTDATE_CHANGE = 'HANDLE_STARTDATE_CHANGE'
+export const HANDLE_ENDDATE_CHANGE = 'HANDLE_ENDDATE_CHANGE'
+export const HANDLE_SUBMIT = 'HANDLE_SUBMIT'
+export const ARCHIVE_CONFIRMATION = 'ARCHIVE_CONFIRMATION'
+export const SHOW_ARCHIEVE = 'SHOW_ARCHIEVE'
+
+
+const project = {
+    name: '',
+    clientname: '',
+    resources: [],
+    startDate: null,
+    endDate: null,
+    description: '',
+}
+
+
+const initialState = {
+    projects: [],
+    resources: RESOURCES,
+    filteredProjects: [],
+    project: project,
+    showModal: false,
+    deleteModal: false,
+    archieveProjectId: 0,
+    archievedProjects: [],
+    showArchieve: false
+}
 
 export function LoadProjects() {
     return {
@@ -15,15 +47,30 @@ export function LoadProjects() {
     }
 }
 
-export function NavigateToProject(id) {
-
-}
-export function Drag_Project(event) {
+export function ArchiveProjectConfirmed() {
     return (dispatch, getState) => {
         return new Promise((resolve) => {
             dispatch({
-                type: ARCHIVE_PROJECT,
-                payload: event.project
+                type: ARCHIVE_PROJECT
+            })
+        })
+    }
+}
+export function Archieve_Project(event) {
+        return (dispatch, getState) => {
+        return new Promise((resolve) => {
+            dispatch({
+                type: ARCHIVE_CONFIRMATION,
+                payload: event && event.project ? event.project : null
+            })
+        })
+    }
+}
+export function ShowArchieveProjects() {
+    return (dispatch, getState) => {
+        return new Promise((resolve) => {
+            dispatch({
+                type: SHOW_ARCHIEVE
             })
         })
     }
@@ -59,12 +106,54 @@ export function Add_Project() {
         })
     }
 }
-
-function ArchiveProject(action) {
-    console.log("Project ID", action.payload);
+export function Project_Details(id) {
+    return (dispatch, getState) => {
+        return new Promise((resolve) => {
+            dispatch({
+                type: PROJECT_DETAILS,
+                payload: id
+            })
+        })
+    }
 }
-function AddProject(action) {
-    console.log("Add Project Clicked");
+
+//ADD & EDIT POPUP  RELATED FUNCTION
+export function handleMultiSelectChange(objs) {
+    return (dispatch, getState) => {
+        return new Promise((resolve) => {
+            dispatch({
+                type: HANDLE_MULTI_SELECT,
+                payload: objs
+            })
+        })
+    }
+}
+export function handleChange(e) {
+    return (dispatch, getState) => {
+        return new Promise((resolve) => {
+            dispatch({
+                type: HANDLE_CHANGE_EVENT,
+                payload: {
+                    key: e.target.name,
+                    value: e.target.value
+                }
+            })
+        })
+    }
+}
+export function handleStartDateChange(startDate) {
+    let value = startDate;
+    return (dispatch, getState) => {
+        return new Promise((resolve) => {
+            dispatch({
+                type: HANDLE_STARTDATE_CHANGE,
+                payload: {
+                    key: 'startDate',
+                    value: startDate
+                }
+            })
+        })
+    }
 }
 
 function ProjectDetail(action) {
@@ -74,32 +163,108 @@ function ProjectDetail(action) {
         console.log(getState)
     }
 }
+export function handleEndDateChange(endDate) {
+    return (dispatch, getState) => {
+        return new Promise((resolve) => {
+            dispatch({
+                type: HANDLE_ENDDATE_CHANGE,
+                payload: {
+                    key: 'endDate',
+                    value: endDate
+                }
+            })
+        })
+    }
 
-const ACTION_HANDLERS = {
-
-    ARCHIVE_PROJECT: (state, action) => {
-        ArchiveProject(action);
-        return Object.assign({}, state)
-    },
-
-    ADD_PROJECT: (state, action) => {
-        AddProject(action);
-        return Object.assign({}, state)
-    },
-    PROJECT_DETAILS: (state, action) => {
-        ProjectDetail(action);
-        return Object.assign({}, state)
-    },
-    LOAD_PROJECTS: (state, action) => {
-        return Object.assign({}, state, { projects: action.payload })
+}
+export function handleSubmit(e) {
+    return {
+        type: HANDLE_SUBMIT
     }
 }
 
-const initialState = {
-    projects: []
+
+
+
+const ACTION_HANDLERS = {
+    [SHOW_ARCHIEVE]: (state, action) => {
+        return Object.assign({}, state, { showArchieve: !state.showArchieve });
+
+
+    },
+    [ARCHIVE_CONFIRMATION]: (state, action) => {
+        const projectId = action.payload ? action.payload : null;
+        return Object.assign({}, state, { archieveProjectId: projectId, deleteModal: !state.deleteModal });
+    },
+    [ARCHIVE_PROJECT]: (state, action) => {
+       let newState = Object.assign({}, state);
+        let updatedProjs = []
+        // let archievProjects = []
+        // newState.archievedProjects.map((proj) => {
+        //     archievProjects.push(proj)
+        // })
+        newState.projects.map((proj) => {
+             if (proj.id == state.archieveProjectId) {
+                proj.status = 0
+               
+            }
+            updatedProjs.push(proj);
+        })
+        return Object.assign({}, newState, { projects: updatedProjs, deleteModal: !state.deleteModal })
+    },
+    [ADD_PROJECT]: (state, action) => {
+        return Object.assign({}, state, { showModal: !state.showModal,project: project})
+       // return Object.assign({}, state, { showModal: !state.showModal })
+
+    },
+    [PROJECT_DETAILS]: (state, action) => {
+        return browserHistory.push(`/project/${action.payload}`);
+        // return Object.assign({}, state)
+    },
+    [LOAD_PROJECTS]: (state, action) => {
+        let updatedProjs = []
+        let archievProjects = []
+        let projects =action.payload
+        projects.map((proj) => {
+             if (proj.status==1) {
+                archievProjects.push(proj)
+            } else{
+                updatedProjs.push(proj)
+            }
+        })
+        return Object.assign({}, state, { projects: updatedProjs, archievedProjects: archievProjects, filteredProjects: updatedProjs})
+    },
+    [HANDLE_MULTI_SELECT]: (state, action) => {
+        let newState = Object.assign({}, state);
+        let projectstate = _.extend({}, state.project);
+        let project= Object.assign({}, projectstate, { resources: action.payload })
+        return Object.assign({}, newState, { project});
+    },
+    [HANDLE_CHANGE_EVENT]: (state, action) => {
+        let newSelected = _.extend({}, state.project);
+        newSelected[action.payload.key] = action.payload.value;
+        return Object.assign({}, state, { project: newSelected });
+    },
+    [HANDLE_STARTDATE_CHANGE]: (state, action) => {
+        let newSelected = _.extend({}, state.project);
+        newSelected[action.payload.key] = action.payload.value;
+        return Object.assign({}, state, { project: newSelected });
+    },
+    [HANDLE_ENDDATE_CHANGE]: (state, action) => {
+        let newSelected = _.extend({}, state.project);
+        newSelected[action.payload.key] = action.payload.value;
+        return Object.assign({}, state, { project: newSelected });
+    },
+    [HANDLE_SUBMIT]: (state, action) => {
+        debugger;
+        console.log(state.project);
+        return Object.assign({}, state, { project: project });
+    }
+
 }
 
 export default function homeReducer(state = initialState, action) {
     const handler = ACTION_HANDLERS[action.type];
     return handler ? handler(state, action) : state;
 }
+
