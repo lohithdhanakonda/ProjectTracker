@@ -10,7 +10,8 @@ import '../styles/bootstrap-multiselect.css'
 import {form, FormGroup, ControlLabel, FormControl, Modal} from 'react-bootstrap'
 import 'react-date-picker/index.css'
 import { DateField } from 'react-date-picker'
-
+import DateTimePicker from 'react-widgets/lib/DateTimePicker';
+import  '../../../styles/widgetStyles.scss';
 const DATEFORMAT = 'YYYY/MM/DD'
 
 
@@ -34,11 +35,11 @@ class AddProjectView extends React.Component {
                     <div>
                         <FormGroup controlId="start_date">
                             <ControlLabel>Start Date: </ControlLabel>
-                        <DateField placeholder="Select Date" onChange={this.props.handleStartDateChange.bind(this)} value={this.props.project.startDate} dateFormat={DATEFORMAT} footer={false} updateOnDateClick={true} collapseOnDateClick={true} />
+                        <DateTimePicker time={false} onChange={this.props.handleStartDateChange} value={this.props.project.startDate}/>
                         </FormGroup>
                         <FormGroup controlId="end_date">
                             <ControlLabel>Expected End Date: </ControlLabel>
-                        <DateField placeholder="Select Date" onChange={this.props.handleEndDateChange.bind(this)} value={this.props.project.endDate} dateFormat={DATEFORMAT} footer={false} updateOnDateClick={true} collapseOnDateClick={true} />
+                        <DateTimePicker time={false} onChange={this.props.handleEndDateChange} value={this.props.project.endDate}/>
                         </FormGroup>
                     </div>
                     <FormGroup controlId="description">

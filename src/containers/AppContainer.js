@@ -6,7 +6,9 @@ import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-
+import momentLocalizer from 'react-widgets/lib/localizers/moment'
+import moment from 'moment'
+momentLocalizer(moment)
 injectTapEventPlugin();
 class AppContainer extends Component {
   static propTypes = {
